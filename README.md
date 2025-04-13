@@ -42,7 +42,7 @@ python manage.py migrate
 # Run server
 python manage.py runserver
 
-
+---
 📜 License
 This project is licensed under the MIT License.
 Feel free to use, fork, or contribute to the madness.
