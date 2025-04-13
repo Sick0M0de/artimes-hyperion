@@ -1,6 +1,6 @@
 # ⚔️ Artimes Hyperion
 
-> “A god doesn't ask for permission. He takes.” — Dante
+> “This one's gonna be a doozy.” — Dante
 
 Artimes Hyperion is your ultimate productivity companion forged for students, dreamers, and warriors alike. A full-stack Django-powered app with style, purpose, and intensity. Designed to help you focus, plan, and conquer your daily grind—without losing your soul.
 
