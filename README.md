@@ -47,4 +47,4 @@ python manage.py runserver
 This project is licensed under the MIT License.
 Feel free to use, fork, or contribute to the madness.
 
-“Silence the world. Focus the chaos. Unleash your Hyperion.”
+“Silence the world. Focus the chaos. Unleash your Hyperion."
