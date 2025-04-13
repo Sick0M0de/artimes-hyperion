@@ -78,10 +78,15 @@ WSGI_APPLICATION = 'hyperion.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'hyperion_db',        # Choose any name you want
+        'USER': 'postgres',           # Your PostgreSQL username
+        'PASSWORD': 'itsjazzkun',  # The password you set
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
+
 
 
 # Password validation
