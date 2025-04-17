@@ -11,7 +11,7 @@ Hyperion is your ultimate productivity sidekick, forged for students, dreamers, 
   *“You call that focus? Even Vergil’s ghost is laughing!”*
 
 - **✍️ Real-time Note-taking like a Notion Clone**  
-  Scribble your genius mid-battle—smooth, fast, and way cooler than a Vergil's diary.
+  Scribble your genius mid-battle—smooth, fast, and way cooler than  average diary.
 
 - **📅 To-do List with Priorities, Streaks, and Stat Tracking**  
   Prioritize like you’re dodging crazy hordes, track streaks like a style meter, and flex those stats like a true hunter.
