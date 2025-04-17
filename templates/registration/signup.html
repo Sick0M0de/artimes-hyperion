@@ -1,0 +1,14 @@
+{% extends 'admin/base.html' %}  {# Or your base template if you have one #}
+{% load i18n %}
+
+{% block title %}{% translate 'Create user' %}{% endblock %}
+
+{% block content %}
+<p>{% translate "Please enter the following information to create your account:" %}</p>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">{% translate 'Create my account' %}</button>
+</form>
+{% endblock %}
