@@ -9,18 +9,18 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-0=!ucw0@kcw&i91z!1j$d%_8vtl&a$jyial2^l8o_wn4t6th5a'
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'users',
     'habits',
     'pomodoro',
@@ -58,10 +59,11 @@ ROOT_URLCONF = 'hyperion.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
@@ -79,9 +81,9 @@ WSGI_APPLICATION = 'hyperion.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'hyperion_db',        # Choose any name you want
-        'USER': 'postgres',           # Your PostgreSQL username
-        'PASSWORD': 'itsjazzkun',  # The password you set
+        'NAME': 'hyperion_db',         # Choose any name you want
+        'USER': 'postgres',             # Your PostgreSQL username
+        'PASSWORD': 'itsjazzkun',    # The password you set
         'HOST': 'localhost',
         'PORT': '5432',
     }
@@ -124,8 +126,18 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+LOGIN_URL = '/admin/login/' # Or your custom frontend login URL if you create one later
+LOGIN_REDIRECT_URL = '/admin/' # Default page after successful login (e.g., admin dashboard)
+LOGOUT_REDIRECT_URL = '/' # Page to redirect to after logging out (e.g., homepage or login page)
