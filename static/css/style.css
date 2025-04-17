@@ -1,0 +1,267 @@
+@import url('https://fonts.googleapis.com/css2?family=Lemon+Milk:wght@400;700&display=swap');
+
+.row {
+    min-height: auto; /* Remove excessive height */
+    align-items: center;
+}
+
+.custom-btn {
+    background-color: #f44336; /* red */
+    color: white;
+    font-weight: 600;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.custom-btn:hover {
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.custom-btn:focus,
+.custom-btn:active,
+.custom-btn:visited {
+    color: white;
+    outline: none;
+    text-decoration: none !important;
+}
+
+* {
+    box-sizing: border-box;
+    font-size: 0.97em; /* 3% smaller than default */
+    font-style: normal; /* Explicitly non-italic */
+    font-family: "Lemon Milk", sans-serif; /* Enforce Lemon Milk globally */
+}
+
+header, section {
+    overflow-x: hidden;
+}
+
+:root {
+    --Gothic: "Lemon Milk", sans-serif;
+    --light-grey: #D3D3D3;
+    --bggradient: linear-gradient(to bottom, #F5F5FF, #EDE9FF); /* Brighter lavender to soft purple-white */
+    --dggradient: linear-gradient(to bottom, #EDE9FF, #F5F5FF); /* Reverse for contrast */
+    --sggradient: linear-gradient(to bottom, #EDE9FF, #F5F5FF, #EDE9FF); /* Subtle bright loop */
+    --pggradient: linear-gradient(to bottom, #EDE9FF, #E6E0FA); /* Soft purple to lighter purple */
+}
+
+header{
+    background:#ffffff ;
+    background: var(--bggradient);
+    padding-bottom: 2rem;
+}
+
+/*section1*/
+
+/*section1 */
+.section-1 {
+    padding: 5vmin 0; /* Reduced padding for tighter layout */
+    position: relative;
+    background: var(--sggradient); /* Dark theme background */
+    color: #ffffff; /* Light text for dark theme */
+}
+
+.section-1 .row {
+    align-items: center; /* Ensure vertical alignment */
+}
+
+.section-1 .feature-1 .image-wrapper {
+    position: relative;
+    transform: perspective(500px) rotateX(10deg) rotateY(-10deg); /* 3D tilt */
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease;
+}
+
+.section-1 .feature-1 .image-wrapper:hover {
+    transform: perspective(500px) rotateX(5deg) rotateY(-5deg); /* Subtle hover effect */
+}
+
+.section-1 .feature-1 img {
+    max-width: 100%;
+    max-height: 350px; /* Adjust based on your image */
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    z-index: 0; /* Image stays behind */
+}
+
+.section-1 .panel {
+    position: relative;
+    background: white;
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+    z-index: 1; /* Panel on top */
+    margin-left: -50px; /* Overlap image slightly */
+    margin-top: -80px; /* Pull panel up to cover image bottom */
+    color: #333; /* Dark text inside panel */
+}
+
+.section-1 .panel h1 {
+    font-weight: bold;
+    font-size: 2em;
+}
+
+.section-1 .panel p {
+    font-size: 0.9em;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+/* Keep the pray img style if still needed, though it seems unrelated to feature-1 */
+.section-1 .row .col-md-6 .pray img {
+    opacity: 0.8;
+    width: 10%;
+    border-radius: 0.2em;
+}
+
+/*section2*/
+
+.some-features {
+    width: 100%;
+    height: 55vmin;
+    background: url("/static/images/sample preview img.png"); /* Updated path */
+    background-position: -24rem -19rem;
+    background-size: 150%;
+    position: relative;
+}
+
+.some-features .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+}
+
+.some-features .content {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    padding-top: 19vmin;
+}
+
+.some-features .content > h1 {
+    font-family: var(--Gothic);
+    font-size: 5vmin;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+}
+
+.some-features .content > p {
+    font-family: var(--Gothic);
+    font-size: 2vmin;
+    color: #e5e5e5;
+}
+
+.numbers .rect {
+    position: relative;
+    z-index: 1;
+    background: white;
+    width: 17rem;
+    height: 12rem;
+    padding-top: 3.5vmin;
+    margin: 1rem;
+    border-radius: 0.5em;
+    box-shadow: 1px 2px 50px 0px rgba(62, 58, 58, 0.823);
+}
+
+.numbers {
+    margin-top: -15vmin;
+}
+
+.numbers .rect h1 {
+    font-size: 2rem;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+}
+
+.numbers .rect > p {
+    font-family: var(--Gothic);
+    font-size: 0.95em; /* Retain 5% smaller for feature cards */
+    font-style: normal; /* Remove italics from feature card descriptions */
+}
+
+/*section3 */
+.section-3 {
+    padding: 5vmin 0; /* Consistent padding with section-1 */
+    position: relative;
+    background: var(--pggradient); /* Dark theme background */
+    color: #ffffff; /* Light text */
+}
+
+.section-3 .row {
+    align-items: center; /* Vertical alignment */
+}
+
+.section-3 .groqp .image-wrapper {
+    position: relative;
+    transform: perspective(500px) rotateX(10deg) rotateY(10deg); /* 3D tilt, flipped direction */
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease;
+}
+
+.section-3 .groqp .image-wrapper:hover {
+    transform: perspective(500px) rotateX(5deg) rotateY(5deg); /* Subtle hover effect */
+}
+
+.section-3 .groqp img {
+    max-width: 100%;
+    max-height: 350px; /* Adjust based on your image */
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    z-index: 0; /* Image behind panel */
+}
+
+.section-3 .panel {
+    position: relative;
+    background: var(--dggradient);
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+    z-index: 1; /* Panel on top */
+    margin-right: -50px; /* Overlap image slightly from the right */
+    margin-top: -100px; /* Pull panel up to cover image bottom */
+    color: #333; /* Dark text inside panel */
+    text-align: right; /* Keep text right-aligned */
+}
+
+.section-3 .panel h1 {
+    font-weight: bold;
+    font-size: 2em;
+}
+
+.section-3 .panel p {
+    font-size: 0.9em;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+section {
+    padding: 5vmin 0; /* Base padding for each section */
+    margin-bottom: 5vmin; /* Gap between sections */
+}
+section:last-child {
+    margin-bottom: 0;
+}
+
+footer {
+    background-color: #EDE9FF; /* Light purple gradient-inspired background */
+    padding: 5vmin 0;
+    color: #4A2C6A; /* Dark purple text for contrast */
+}
+
+footer .row {
+    min-height: auto; /* Remove excessive height if not needed */
+    align-items: center;
+}
+
+footer h1 {
+    font-size: 1.5em; /* Slightly smaller for balance */
+    font-weight: bold;
+    text-transform: uppercase; /* Add emphasis */
+    letter-spacing: 2px; /* Improve readability and style */
+}
