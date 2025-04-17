@@ -11,10 +11,10 @@ Hyperion is your ultimate productivity sidekick, forged for students, dreamers, 
   *“You call that focus? Even Vergil’s ghost is laughing!”*
 
 - **✍️ Real-time Note-taking like a Notion Clone**  
-  Scribble your genius mid-battle—smooth, fast, and way cooler than a demon’s diary.
+  Scribble your genius mid-battle—smooth, fast, and way cooler than a Vergil's diary.
 
 - **📅 To-do List with Priorities, Streaks, and Stat Tracking**  
-  Prioritize like you’re dodging demon hordes, track streaks like a style meter, and flex those stats like a true hunter.
+  Prioritize like you’re dodging crazy hordes, track streaks like a style meter, and flex those stats like a true hunter.
 
 - **👀 Background Focus Timer with Pause Recovery Logic**  
   Lose focus? Hyperion’s got your back—pauses the clock and nudges you with a “Get it together, rookie!” recovery mode.
@@ -25,7 +25,7 @@ Hyperion is your ultimate productivity sidekick, forged for students, dreamers, 
 ## 🛠️ Built With
 
 - **Backend:** Django + PostgreSQL  
-  The sturdy backbone to take on any productivity demon.
+  The sturdy backbone to take on any productivity chaos.
 
 - **Frontend:** Currently in progress (handled by a friend)  
   Expect some stylish flair to match the vibe—stay tuned!
@@ -35,7 +35,7 @@ Hyperion is your ultimate productivity sidekick, forged for students, dreamers, 
 
 ## 🧠 Philosophy
 
-Built not to manage students... But to awaken the inner devil hunter within—focus with flair, not fear!
+Built not to manage students... But to awaken the inner hunter within—focus with flair, not fear!
 
 ## 🧾 Setup Instructions
 
@@ -70,5 +70,3 @@ Built not to manage students... But to awaken the inner devil hunter within—fo
 
 This project is licensed under the MIT License. Feel free to use, fork, or contribute to the madness—join the hunt!  
 **“Silence the world. Focus the chaos. Unleash your Hyperion—Dante would approve (with a stylish hair flip)!”**
-```
-
