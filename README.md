@@ -1,53 +1,74 @@
-⚔️ Hyperion
+# ⚔️ Hyperion
 
-“Focus isn’t a gift. It’s a weapon. Welcome to the training grounds, hunter!” — Dante (with a smirk)
+**“Focus isn’t a gift. It’s a weapon. Welcome to the training grounds, hunter!”** — Dante (with a smirk)
 
 Hyperion is your ultimate productivity sidekick, forged for students, dreamers, and warriors ready to slay their daily grind. This full-stack Django-powered beast brings style, sass, and a touch of DMC-inspired flair—helping you focus, plan, and conquer without selling your soul to the chaos. No triggers here, just pure, stylish focus!
-🔮 Features
 
-⏱️ Custom Pomodoro Timer with Savage QuotesTick-tock like a pro, with Dante-level quips to keep you motivated. “You call that focus? Even Vergil’s ghost is laughing!”  
+## 🔮 Features
 
+- **⏱️ Custom Pomodoro Timer with Savage Quotes**  
+  Tick-tock like a pro, with Dante-level quips to keep you motivated.  
+  *“You call that focus? Even Vergil’s ghost is laughing!”*
 
-✍️ Real-time Note-taking like a Notion CloneScribble your genius mid-battle—smooth, fast, and way cooler than a demon’s diary.  
+- **✍️ Real-time Note-taking like a Notion Clone**  
+  Scribble your genius mid-battle—smooth, fast, and way cooler than a demon’s diary.
 
+- **📅 To-do List with Priorities, Streaks, and Stat Tracking**  
+  Prioritize like you’re dodging demon hordes, track streaks like a style meter, and flex those stats like a true hunter.
 
-📅 To-do List with Priorities, Streaks, and Stat TrackingPrioritize like you’re dodging demon hordes, track streaks like a style meter, and flex those stats like a true hunter.  
+- **👀 Background Focus Timer with Pause Recovery Logic**  
+  Lose focus? Hyperion’s got your back—pauses the clock and nudges you with a “Get it together, rookie!” recovery mode.
 
+- **💀 Minimal UI, Brutal Functionality**  
+  Sleek design with no nonsense—because who has time for fluff when you’re fighting procrastination?
 
-👀 Background Focus Timer with Pause Recovery LogicLose focus? Hyperion’s got your back—pauses the clock and nudges you with a “Get it together, rookie!” recovery mode.  
+## 🛠️ Built With
 
+- **Backend:** Django + PostgreSQL  
+  The sturdy backbone to take on any productivity demon.
 
-💀 Minimal UI, Brutal FunctionalitySleek design with no nonsense—because who has time for fluff when you’re fighting procrastination?  
+- **Frontend:** Currently in progress (handled by a friend)  
+  Expect some stylish flair to match the vibe—stay tuned!
 
+- **Deployment Ready:** Easily extensible and scalable  
+  Ready to roll out and conquer the hackathon battlefield or beyond.
 
-🛠️ Built With
+## 🧠 Philosophy
 
-Backend: Django + PostgreSQLThe sturdy backbone to take on any productivity demon.
+Built not to manage students... But to awaken the inner devil hunter within—focus with flair, not fear!
 
-Frontend: Currently in progress (handled by a friend)Expect some stylish flair to match the vibe—stay tuned!
+## 🧾 Setup Instructions
 
-Deployment Ready: Easily extensible and scalableReady to roll out and conquer the hackathon battlefield or beyond.
+1. **Clone the repo:**
+   ```bash
+   git clone https://github.com/itsjazzkun/artimes-hyperion.git
+   ```
 
+2. **Create virtual environment:**
+   ```bash
+   python -m venv venv
+   venv\Scripts\activate  # For Windows
+   source venv/bin/activate  # For macOS/Linux
+   ```
 
-🧠 Philosophy
-Built not to manage students...But to awaken the inner devil hunter within—focus with flair, not fear!
-🧾 Setup Instructions
-# Clone the repo
-git clone https://github.com/itsjazzkun/artimes-hyperion.git
+3. **Install dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-# Create virtual environment
-python -m venv venv
-venv\Scripts\activate
+4. **Apply migrations:**
+   ```bash
+   python manage.py migrate
+   ```
 
-# Install dependencies
-pip install -r requirements.txt
+5. **Run the server:**
+   ```bash
+   python manage.py runserver
+   ```
 
-# Apply migrations
-python manage.py migrate
+## 📜 License
 
-# Run server
-python manage.py runserver
+This project is licensed under the MIT License. Feel free to use, fork, or contribute to the madness—join the hunt!  
+**“Silence the world. Focus the chaos. Unleash your Hyperion—Dante would approve (with a stylish hair flip)!”**
+```
 
-📜 License
-This project is licensed under the MIT License.Feel free to use, fork, or contribute to the madness—join the hunt!
-“Silence the world. Focus the chaos. Unleash your Hyperion—Dante would approve (with a stylish hair flip)!”
