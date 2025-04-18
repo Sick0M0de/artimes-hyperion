@@ -6,20 +6,24 @@ Hyperion is your ultimate productivity sidekick, forged for students, dreamers, 
 
 ## 🔮 Features
 
-- **⏱️ Custom Pomodoro Timer with Savage Quotes**  
-  Tick-tock like a pro, with Dante-level quips to keep you motivated.  
+- **⏱️ Custom Pomodoro Timer with Savage Quotes**
+  Tick-tock like a pro, with Dante-level quips to keep you motivated.
   *“You call that focus? Even Vergil’s ghost is laughing!”*
 
-- **✍️ Real-time Note-taking like a Notion Clone**  
-  Scribble your genius mid-battle—smooth, fast, and way cooler than  average diary.
+- **🎧 **Battle Hymns: YouTube Music Integration****
+  Stream your focus tracks or power playlists directly from YouTube. Accepts both single video links and full playlist URLs to fuel your grind.
+  *"Every hunter needs a good soundtrack."*
 
-- **📅 To-do List with Priorities, Streaks, and Stat Tracking**  
+- **✍️ Real-time Note-taking like a Notion Clone**
+  Scribble your genius mid-battle—smooth, fast, and way cooler than average diary.
+
+- **📅 To-do List with Priorities, Streaks, and Stat Tracking**
   Prioritize like you’re dodging crazy hordes, track streaks like a style meter, and flex those stats like a true hunter.
 
-- **👀 Background Focus Timer with Pause Recovery Logic**  
+- **👀 Background Focus Timer with Pause Recovery Logic**
   Lose focus? Hyperion’s got your back—pauses the clock and nudges you with a “Get it together, rookie!” recovery mode.
 
-- **💀 Minimal UI, Brutal Functionality**  
+- **💀 Minimal UI, Brutal Functionality**
   Sleek design with no nonsense—because who has time for fluff when you’re fighting procrastination?
 
 ## 🛠️ Built With
