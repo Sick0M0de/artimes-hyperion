@@ -25,4 +25,5 @@ urlpatterns = [
     # path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/signup/', signup_view, name='signup'),
     path('login/', LoginView.as_view(template_name='admin/login.html'), name='login'),
+    path('pomodoro_app/', include('pomodoro_app.urls')),
 ]

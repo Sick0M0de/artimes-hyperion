@@ -1,0 +1,22 @@
+{# D:\artimes-hyperion\pomodoro_app\templates\pomodoro\focus_regain_modal.html #}
+
+<div class="modal fade" id="focusRegainModal" tabindex="-1" aria-labelledby="focusRegainModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+      <div class="modal-content bg-dark text-light">
+        <div class="modal-header border-0 pb-0">
+           <h5 class="modal-title" id="focusRegainModalLabel">Focus Regain</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        {# Added ID to the modal-body div #}
+        <div class="modal-body text-center pt-0" id="focusRegainModalBody">
+          {# Message and paused duration will be set by JavaScript #}
+          You were paused for <strong id="pausedDurationDisplay">0:00</strong>. <br> Should I add this time to your current Pomodoro session?
+        </div>
+        <div class="modal-footer border-0 justify-content-center">
+          {# Added data-bs-dismiss="modal" for fallback closing, but script will primarily use hide() #}
+          <button type="button" class="btn btn-success" id="addPausedTimeBtn" data-bs-dismiss="modal">Yes, Add Time</button>
+          <button type="button" class="btn btn-danger" id="discardPausedTimeBtn" data-bs-dismiss="modal">No, Discard Time</button>
+        </div>
+      </div>
+    </div>
+  </div>

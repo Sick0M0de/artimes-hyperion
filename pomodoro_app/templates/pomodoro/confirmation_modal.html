@@ -1,0 +1,23 @@
+{# pomodoro_app/templates/pomodoro/confirmation_modal.html #}
+
+<div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+      <div class="modal-content bg-dark text-light"> {# bg-dark/text-light styled in style.css #}
+        <div class="modal-header border-0 pb-0">
+           <h5 class="modal-title" id="confirmationModalLabel">Confirm Action</h5> {# Standard modal title #}
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        {# Modal body where the confirmation message will be displayed #}
+        <div class="modal-body text-center pt-0" id="confirmationModalBody">
+          {# Default message - will be set by JavaScript depending on context (config change or reset) #}
+          Action requires confirmation. Are you ready? {# Generic Dante-style placeholder for default #}
+        </div>
+        <div class="modal-footer border-0 justify-content-center">
+          {# Buttons for confirming or canceling the action #}
+          {# data-bs-dismiss="modal" added for fallback closing, but script will primarily use hide() #}
+          <button type="button" class="btn btn-primary" id="confirmProceedBtn" data-bs-dismiss="modal">Proceed</button> {# Default button text #}
+          <button type="button" class="btn btn-secondary" id="confirmCancelBtn" data-bs-dismiss="modal">Cancel</button> {# Default button text #}
+        </div>
+      </div>
+    </div>
+  </div>

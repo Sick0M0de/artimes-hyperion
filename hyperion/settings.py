@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'users',
     'habits',
-    'pomodoro',
+    'pomodoro_app',
     'ai_engine',
 ]
 

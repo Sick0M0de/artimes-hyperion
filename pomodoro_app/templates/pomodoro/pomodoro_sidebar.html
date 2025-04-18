@@ -1,0 +1,136 @@
+{# pomodoro_app/templates/pomodoro/pomodoro_sidebar.html #}
+{% load static %}
+
+<div id="pomodoroSidebar" class="sidebar vh-100 position-fixed end-0 top-0"> {# Removed p-3 here, content area has padding #}
+    <button id="closeSidebarBtn" class="btn-close btn-close-white position-absolute top-0 end-0 mt-3 me-3" aria-label="Close"></button>
+
+    {# Container for the Timer Widget block #}
+    <div id="timerWidgetContainer" class="mb-4"> {# Margin below the timer widget container #}
+         <div id="timerWidget" class="timer-widget d-flex flex-column align-items-center justify-content-center">
+            <h5 id="displayTime" class="mb-3">25:00</h5> {# Time display #}
+            <div class="timer-controls d-flex justify-content-center align-items-center">
+                {# Button text updated for Dante theme #}
+                <button id="startPauseBtn" class="btn btn-primary me-3">Let's Rock!</button> {# Start/Pause Button (Dante Text) #}
+                <button id="resetTimerBtn" class="btn btn-secondary me-3"><i class="bi bi-arrow-clockwise"></i> Reset</button> {# Reset Button #}
+                {# Optional: Add settings icon button here if needed later #}
+                {# <button id="settingsBtn" class="btn btn-secondary"><i class="bi bi-gear"></i></button> #}
+            </div>
+        </div>
+    </div>
+
+    {# This flex-grows if sidebar is tall #}
+    <div class="sidebar-content">
+
+        <h6 class="mt-4 mb-2">Music Mode</h6>
+        <div id="musicModeSection" class="music-mode-section mb-4 p-3 rounded"> {# Added ID #}
+            <p class="small text-muted">Crank up the volume!</p> {# Dante flair #}
+            <div class="mb-3">
+                <label for="youtubeLinkInput" class="form-label small">YouTube Link</label>
+                <input type="text" class="form-control form-control-sm" id="youtubeLinkInput" placeholder="Paste YouTube link...">
+            </div>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <button class="btn btn-sm btn-primary" id="loadMusicBtn">Load that track!</button> {# Dante flair #}
+                 {# Placeholder for YouTube iframe - will be hidden #}
+                 <div id="youtube-player" style="display: none;"></div>
+                <div class="music-controls" style="display: none;"> {# Controls initially hidden #}
+                     <button class="btn btn-sm btn-secondary me-1" id="playPauseMusicBtn"><i class="bi bi-play-fill"></i></button> {# Play/Pause Button #}
+                     {# Add volume control slider later if needed #}
+                </div>
+            </div>
+             <p class="small text-muted mt-2" id="currentTrackInfo" style="display: none;">Now playing: <span id="trackTitle"></span></p>
+        </div>
+
+
+        <h6 class="mt-4 mb-3">Configurations</h6>
+         <p class="text-muted small fst-italic mb-3">"Gotta be stylish even in setup."</p> {# Dante quote #}
+
+
+        <div id="defaultConfigs" class="list-group mb-3">
+            <div class="list-group-item list-group-item-dark d-flex justify-content-between align-items-center">
+                <div>
+                    <h6 class="mb-1">smoll talk</h6>
+                    <p class="mb-0 text-muted small">(this is too easy)</p>
+                    <small>25 min work / 5 min break</small>
+                </div>
+                <button class="btn btn-outline-secondary btn-sm edit-config-btn" data-config-id="default-25">Edit</button>
+            </div>
+             <div class="list-group-item list-group-item-dark d-flex justify-content-between align-items-center">
+                <div>
+                    <h6 class="mb-1">time to get my hands dirty by work</h6>
+                    <small>50 min work / 10 min break</small>
+                </div>
+                 <button class="btn btn-outline-secondary btn-sm edit-config-btn" data-config-id="default-50">Edit</button>
+            </div>
+             <div class="list-group-item list-group-item-dark d-flex justify-content-between align-items-center">
+                <div>
+                    <h6 class="mb-1">this one's gonna be dozy</h6>
+                    <small>2 hours work / 30 min break</small>
+                </div>
+                 <button class="btn btn-outline-secondary btn-sm edit-config-btn" data-config-id="default-120">Edit</button>
+            </div>
+        </div>
+
+         <div id="editConfigForm" class="card bg-secondary text-light p-3 mb-3" style="display: none;">
+            <h6 class="card-title">Edit Configuration</h6>
+             <input type="hidden" id="editingConfigId">
+            <div class="mb-2">
+                <label for="editWorkTime" class="form-label small">Work Time (mins)</label>
+                <input type="number" class="form-control form-control-sm" id="editWorkTime">
+            </div>
+            <div class="mb-2">
+                <label for="editBreakTime" class="form-label small">Break Time (mins)</label>
+                <input type="number" class="form-control form-control-sm" id="editBreakTime">
+            </div>
+             <div class="mb-2">
+                <label for="editConfigName" class="form-label small">Name</label>
+                <input type="text" class="form-control form-control-sm" id="editConfigName">
+            </div>
+            <div class="d-flex justify-content-end">
+                 <button class="btn btn-success btn-sm me-2" id="saveConfigBtn">Save</button>
+                 <button class="btn btn-secondary btn-sm" id="cancelEditBtn">Cancel</button>
+            </div>
+        </div>
+
+        <h6 class="mt-4">Custom Setup</h6>
+        <p class="text-muted small fst-italic mb-3">"Time for a kid to do a man's job."</p> {# Dante quote #}
+        <div class="custom-config-inputs mb-3">
+            <div class="mb-2">
+                <label for="customWorkTime" class="form-label small">Work Time (mins)</label>
+                <input type="number" class="form-control form-control-sm" id="customWorkTime" value="30" min="1">
+            </div>
+            <div class="mb-2">
+                <label for="customBreakTime" class="form-label small">Break Time (mins)</label>
+                <input type="number" class="form-control form-control-sm" id="customBreakTime" value="5" min="1">
+            </div>
+             <div class="mb-2">
+                <label for="customConfigName" class="form-label small">Name (Optional)</label>
+                <input type="text" class="form-control form-control-sm" id="customConfigName">
+            </div>
+            <button class="btn btn-success btn-sm w-100" id="addCustomConfigBtn">Add Custom Config</button>
+        </div>
+
+        <h6 class="mt-4 mb-2">Saved Custom Configs</h6>
+        <div id="savedCustomConfigs" class="list-group saved-custom-configs">
+            <div class="list-group-item list-group-item-dark d-flex justify-content-between align-items-center">
+                <div>
+                    <h6 class="mb-1">My 40/8 Config</h6>
+                     <small>40 min work / 8 min break</small>
+                </div>
+                 <div>
+                     <button class="btn btn-outline-secondary btn-sm me-1 edit-config-btn" data-config-id="custom-0">Edit</button>
+                     <button class="btn btn-outline-danger btn-sm delete-config-btn" data-config-id="custom-0">Delete</button>
+                 </div>
+            </div>
+        </div>
+
+         <div class="form-check form-switch mt-4">
+            <input class="form-check-input" type="checkbox" id="focusRegainToggle" checked>
+            <label class="form-check-label" for="focusRegainToggle">
+                Enable Focus Regain Timer
+                <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="right" title="Tracks time spent paused during a work session. You can choose to add this time back to your session to complete the full focus duration."></i>
+            </label>
+        </div>
+
+    </div> {# Removed the audio element as requested #}
+
+</div> 

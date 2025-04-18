@@ -1,0 +1,51 @@
+{# D:\artimes-hyperion\pomodoro_app\templates\pomodoro\pomodoro_page.html #}
+
+{# EXTEND your project's base template - Adjust path if needed #}
+{% extends 'base.html' %}
+
+{% load static %}
+
+{# Set page title (can also add Dante flair here if desired, but base.html title block is already updated) #}
+{% block title %}Pomodoro - Hyperion{% endblock %}
+
+
+{% block content %}
+    {# Content for the main part of this specific page #}
+    {# Main page title with Dante flair #}
+    <h1>Welcome to the Training Grounds!</h1> {# Dante-style Main Page Title #}
+    <p>This page includes the Pomodoro sidebar component.</p>
+    <p>Click the button to toggle the sidebar visibility.</p>
+
+    {# Button to open the Pomodoro sidebar - positioned fixed on the page #}
+    <button id="openPomodoroSidebarBtn" class="btn btn-primary position-fixed top-0 end-0 mt-3 me-3">
+         <i class="bi bi-clock"></i> Toggle Pomodoro
+    </button>
+
+{% endblock %}
+
+{# Place includes OUTSIDE the content block, inside the extra_body block defined in base.html #}
+{% block extra_body %}
+    {# Include the Pomodoro sidebar HTML #}
+    {% include 'pomodoro/pomodoro_sidebar.html' %}
+    {# Include the Focus Regain Modal HTML #}
+    {% include 'pomodoro/focus_regain_modal.html' %}
+    {# Include the Confirmation Modal HTML #}
+    {% include 'pomodoro/confirmation_modal.html' %}
+{% endblock %}
+
+
+{# Add extra CSS needed specifically for this page or included components #}
+{% block extra_css %}
+    {{ block.super }} {# Keep styles from the parent base.html extra_css block if any #}
+    {# Include the Pomodoro specific CSS - Ensure path is correct #}
+    <link rel="stylesheet" href="{% static 'pomodoro/style.css' %}">
+{% endblock %}
+
+
+{# Add extra JS needed specifically for this page or included components #}
+{% block extra_js %}
+    {{ block.super }} {# Keep scripts from the parent base.html extra_js block if any #}
+    {# Include the Pomodoro specific JavaScript - Ensure path is correct #}
+    {# This script handles sidebar logic, timer, modals, music, and requires Bootstrap JS loaded previously (in base.html) #}
+    <script src="{% static 'pomodoro/script.js' %}"></script>
+{% endblock %}
