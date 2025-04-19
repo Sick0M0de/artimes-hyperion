@@ -430,265 +430,371 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Configuration Management ---
 
-    function renderConfigs() {
-        console.log("renderConfigs called.");
-        if (!defaultConfigsContainer) console.warn("Default Configs container (#defaultConfigs) not found.");
-        if (!savedCustomConfigsContainer) {
-            console.warn("Saved Custom Configs container (#savedCustomConfigs) not found. Cannot render custom configs.");
-            return;
-        }
+   // --- Configuration Management ---
 
-        if (defaultConfigsContainer) {
-            defaultConfigsContainer.innerHTML = '';
-            Object.keys(defaultConfigs).forEach(key => {
-                const config = defaultConfigs[key];
-                const configElement = `
-                    <div class="list-group-item list-group-item-dark d-flex justify-content-between align-items-center" data-config-id="${key}">
-                        <div>
-                            <h6 class="mb-1">${config.name || `Default ${config.work}`}</h6>
-                            ${config.quote ? `<p class="mb-0 text-muted small fst-italic">${config.quote}</p>` : ''}
-                            <small>${config.work} min work / ${config.break} min break</small>
-                        </div>
-                        <button class="btn btn-outline-secondary btn-sm edit-config-btn" data-config-id="${key}">Edit</button>
+   function renderConfigs() {
+    console.log("renderConfigs called.");
+    if (!defaultConfigsContainer) console.warn("Default Configs container (#defaultConfigs) not found.");
+    if (!savedCustomConfigsContainer) {
+        console.warn("Saved Custom Configs container (#savedCustomConfigs) not found. Cannot render custom configs.");
+        return;
+    }
+
+    // Render Default Configs (Matches HTML structure from your sidebar template)
+    if (defaultConfigsContainer) {
+        defaultConfigsContainer.innerHTML = ''; // Clear existing default configs
+        Object.keys(defaultConfigs).forEach(key => {
+            const config = defaultConfigs[key];
+            // Note: data-config-id is on the list item div as per your provided HTML
+            const configElement = `
+                <div class="list-group-item list-group-item-dark d-flex justify-content-between align-items-center" data-config-id="${key}">
+                    <div>
+                        <h6 class="mb-1">${config.name || `Default ${config.work}`}</h6>
+                        ${config.quote ? `<p class="mb-0 text-muted small fst-italic">${config.quote}</p>` : ''}
+                        <small>${config.work} min work / ${config.break} min break</small>
                     </div>
-                `;
-                defaultConfigsContainer.innerHTML += configElement;
-            });
-        }
+                    <button class="btn btn-outline-secondary btn-sm edit-config-btn" data-config-id="${key}">Edit</button>
+                </div>
+            `;
+            defaultConfigsContainer.innerHTML += configElement;
+        });
+    }
 
-        savedCustomConfigsContainer.innerHTML = '';
-        if (customConfigs.length === 0) {
-            savedCustomConfigsContainer.innerHTML = '<p class="text-muted small">No custom configurations saved yet.</p>';
-        } else {
-            customConfigs.forEach((config, index) => {
-                const configId = `custom-${index}`;
-                const configElement = `
-                    <div class="list-group-item list-group-item-dark d-flex justify-content-between align-items-center" data-config-id="${configId}">
-                        <div>
-                            <h6 class="mb-1">${config.name || `Custom ${index + 1}`}</h6>
-                            <small>${config.work} min work / ${config.break} min break</small>
-                        </div>
-                        <div>
-                            <button class="btn btn-outline-secondary btn-sm me-1 edit-config-btn" data-config-id="${configId}">Edit</button>
-                            <button class="btn btn-outline-danger btn-sm delete-config-btn" data-config-id="${configId}">Delete</button>
-                        </div>
+    // Render Saved Custom Configs
+    savedCustomConfigsContainer.innerHTML = ''; // Clear existing saved custom list
+
+    if (customConfigs.length === 0) {
+         // Use generic text if no custom configs saved
+         savedCustomConfigsContainer.innerHTML = '<p class="text-muted small">No custom configurations saved yet.</p>';
+    } else {
+        customConfigs.forEach((config, index) => {
+            const configId = `custom-${index}`;
+            // Note: data-config-id is on the list item div as per your provided HTML
+            const configElement = `
+                <div class="list-group-item list-group-item-dark d-flex justify-content-between align-items-center" data-config-id="${configId}">
+                    <div>
+                        <h6 class="mb-1">${config.name || `Custom ${index + 1}`}</h6>
+                        <small>${config.work} min work / ${config.break} min break</small>
                     </div>
-                `;
-                savedCustomConfigsContainer.innerHTML += configElement;
-            });
-        }
-        console.log("Rendered custom configs with indices:", customConfigs.map((_, i) => `custom-${i}`));
+                     <div>
+                        <button class="btn btn-outline-secondary btn-sm me-1 edit-config-btn" data-config-id="${configId}">Edit</button>
+                        <button class="btn btn-outline-danger btn-sm delete-config-btn" data-config-id="${configId}">Delete</button>
+                     </div>
+                </div>
+            `;
+            savedCustomConfigsContainer.innerHTML += configElement;
+        });
+    }
+     console.log("Rendered custom configs with indices:", customConfigs.map((_, i) => `custom-${i}`));
+}
+
+ function loadCustomConfigs() {
+    try {
+         const saved = localStorage.getItem('customPomodoroConfigs');
+         return saved ? JSON.parse(saved) : [];
+    } catch (e) {
+         console.error("Could not load custom configs from localStorage", e);
+         return [];
+    }
+ }
+
+function saveCustomConfigs() {
+    try {
+        localStorage.setItem('customPomodoroConfigs', JSON.stringify(customConfigs));
+    } catch (e) {
+        console.error("Could not save custom configs to localStorage", e);
+        // Optional: Show a user-friendly error message (using a modal or temporary div)
+    }
+}
+
+function addCustomConfig() {
+    console.log("addCustomConfig called.");
+    if (!customWorkTimeInput || !customBreakTimeInput || !customConfigNameInput) {
+         console.warn("Missing custom config input elements.");
+         // Optional: Show error in UI
+         alert("Error: Missing input fields for custom configuration."); // Use modal later
+         return;
     }
 
-    function loadCustomConfigs() {
-        try {
-            const saved = localStorage.getItem('customPomodoroConfigs');
-            return saved ? JSON.parse(saved) : [];
-        } catch (e) {
-            console.error("Could not load custom configs from localStorage", e);
-            return [];
-        }
+    const work = parseInt(customWorkTimeInput.value);
+    const breakTime = parseInt(customBreakTimeInput.value);
+    const name = customConfigNameInput.value.trim();
+
+    // Basic validation for input values
+    if (isNaN(work) || work <= 0 || isNaN(breakTime) || breakTime <= 0) {
+        alert("Please enter valid positive numbers for work and break times."); // Use Bootstrap modal later
+        return;
     }
 
-    function saveCustomConfigs() {
-        try {
-            localStorage.setItem('customPomodoroConfigs', JSON.stringify(customConfigs));
-        } catch (e) {
-            console.error("Could not save custom configs to localStorage", e);
-        }
+    // Check for duplicate config (same work, break, and name)
+    if (customConfigs.some(config => config.work === work && config.break === breakTime && config.name === name)) {
+        alert("A configuration with these exact values and name already exists."); // Use Bootstrap modal later
+        return;
     }
 
-    function addCustomConfig() {
-        console.log("addCustomConfig called.");
-        if (!customWorkTimeInput || !customBreakTimeInput || !customConfigNameInput) {
-            console.warn("Missing custom config input elements.");
-            return;
-        }
+    // Add the new config to the customConfigs array
+    customConfigs.push({ name: name, work: work, break: breakTime });
+    saveCustomConfigs(); // Save updated custom configs to localStorage
+    renderConfigs(); // Re-render the list to show the new config
+    // Reset inputs after adding
+    customWorkTimeInput.value = 30; // Reset to a default or empty
+    customBreakTimeInput.value = 5; // Reset to a default or empty
+    customConfigNameInput.value = ''; // Clear the name input
+     console.log("Custom config added:", { name, work, breakTime });
+}
 
-        const work = parseInt(customWorkTimeInput.value);
-        const breakTime = parseInt(customBreakTimeInput.value);
-        const name = customConfigNameInput.value.trim();
-
-        if (isNaN(work) || work <= 0 || isNaN(breakTime) || breakTime <= 0) {
-            alert("Please enter valid positive numbers for work and break times.");
-            return;
-        }
-
-        if (customConfigs.some(config => config.work === work && config.break === breakTime && config.name === name)) {
-            alert("A configuration with these exact values and name already exists.");
-            return;
-        }
-
-        customConfigs.push({ name: name, work: work, break: breakTime });
-        saveCustomConfigs();
-        renderConfigs();
-        customWorkTimeInput.value = 30;
-        customBreakTimeInput.value = 5;
-        customConfigNameInput.value = '';
-        console.log("Custom config added:", { name, work, breakTime });
-    }
-
-    function deleteCustomConfig(index) {
-        console.log("deleteCustomConfig called for index:", index);
-        if (!savedCustomConfigsContainer) {
-            console.warn("Saved Custom Configs container (#savedCustomConfigs) not found. Cannot delete.");
-            return;
-        }
-        if (index >= 0 && index < customConfigs.length) {
-            if (confirm("Are you sure you want to delete this configuration?")) {
-                customConfigs.splice(index, 1);
-                saveCustomConfigs();
-                renderConfigs();
-                console.log("Custom config deleted at index:", index);
-            }
+ function deleteCustomConfig(index) {
+    console.log("deleteCustomConfig called for index:", index);
+     if (!savedCustomConfigsContainer) {
+         console.warn("Saved Custom Configs container (#savedCustomConfigs) not found. Cannot delete.");
+         alert("Error: Cannot delete custom configs - list container not found."); // Use modal later
+         return;
+     }
+     // --- Added check for customConfigs array existing and index validity ---
+     if (customConfigs && index >= 0 && index < customConfigs.length) {
+     // --- End Added check ---
+        if (confirm("Are you sure you want to delete this configuration?")) { // Could use confirmation modal here too
+            // Remove the config from the array
+            customConfigs.splice(index, 1);
+            saveCustomConfigs(); // Save updated custom configs to localStorage
+            renderConfigs(); // Re-render the list to reflect the deletion
+             console.log("Custom config deleted at index:", index);
+             // TODO: If the deleted config was the active one, reset timer to default or first config
         } else {
-            console.error("Attempted to delete config with invalid index:", index);
+             console.log("Config deletion cancelled by user.");
         }
+    } else {
+         console.error("Attempted to delete config with invalid index:", index);
+         alert("Error: Invalid config index for deletion."); // Use modal later
     }
+ }
 
-    function setActiveConfig(config) {
-        console.log("setActiveConfig called with config:", config);
+ // Function to set the active configuration
+ function setActiveConfig(config) {
+     console.log("setActiveConfig called with config:", config);
 
-        if (currentTimerState !== 'stopped' && confirmationModal) {
-            pendingConfig = config;
-            console.log("Timer running, showing confirmation modal for config change.");
+     // Check if timer is running and confirmation is needed, AND confirmation modal is initialized
+     if (currentTimerState !== 'stopped' && confirmationModal) { // <-- Check if confirmationModal instance exists
+         // Store the selected config temporarily
+         pendingConfig = config;
+          console.log("Timer running, showing confirmation modal for config change.");
 
-            const modalBodyElement = confirmationModalElement.querySelector('.modal-body');
-            if (modalBodyElement) modalBodyElement.innerHTML = "Change configuration? This will reset the current timer.";
+         // Set modal body message for config change - USING GENERIC TEXT
+         const modalBodyElement = confirmationModalElement.querySelector('.modal-body');
+         if(modalBodyElement) modalBodyElement.innerHTML = "Change configuration? This will reset the current timer.";
 
-            const confirmProceedBtn = document.getElementById('confirmProceedBtn');
-            if (confirmProceedBtn) confirmProceedBtn.textContent = "OK";
-            else console.warn("Confirm Proceed button (#confirmProceedBtn) not found for config change modal.");
+         const confirmProceedBtn = document.getElementById('confirmProceedBtn');
+         if(confirmProceedBtn) confirmProceedBtn.textContent = "OK"; // Default button text
+         else console.warn("Confirm Proceed button (#confirmProceedBtn) not found for config change modal.");
 
-            const confirmCancelBtn = document.getElementById('confirmCancelBtn');
-            if (confirmCancelBtn) confirmCancelBtn.textContent = "Cancel";
-            else console.warn("Confirm Cancel button (#confirmCancelBtn) not found for config change modal.");
+         const confirmCancelBtn = document.getElementById('confirmCancelBtn');
+         if(confirmCancelBtn) confirmCancelBtn.textContent = "Cancel"; // Default button text
+         else console.warn("Confirm Cancel button (#confirmCancelBtn) not found for config change modal.");
 
-            const localHandleConfigConfirm = () => {
-                console.log("Config change confirmed via modal (Local Handler).");
-                if (confirmationModal) confirmationModal.hide();
-                applyConfig(pendingConfig);
-                console.log("Config applied by user via modal (Local Handler).");
-            };
-            const localHandleConfigCancel = () => {
+         // Attach local listeners for this specific confirmation scenario
+           const localHandleConfigConfirm = () => {
+               console.log("Config change confirmed via modal (Local Handler).");
+               if (confirmationModal) confirmationModal.hide();
+               // --- Added check for pendingConfig existing ---
+               if (pendingConfig) {
+                  applyConfig(pendingConfig); // Apply config if it was a config change confirmation
+                  console.log("Config applied by user via modal (Local Handler).");
+               } else {
+                   console.warn("Config change confirmed but no pending config found.");
+               }
+               // --- End Added check ---
+               // Note: Listeners attached with 'once: true' don't need explicit removal here.
+           };
+           const localHandleConfigCancel = () => {
                 console.log("Config change cancelled via modal (Local Handler).");
                 if (confirmationModal) confirmationModal.hide();
-                pendingConfig = null;
+                pendingConfig = null; // Clear pending config if cancelled
                 console.log("Pending config cleared due to cancellation (Local Handler).");
-                resetConfirmationModalText();
-            };
+                resetConfirmationModalText(); // Restore default text on cancel
+               // Note: Listeners attached with 'once: true' don't need explicit removal here.
+           };
 
-            if (confirmProceedBtn) confirmProceedBtn.addEventListener('click', localHandleConfigConfirm, { once: true });
-            if (confirmCancelBtn) confirmCancelBtn.addEventListener('click', localHandleConfigCancel, { once: true });
-            if (confirmationModalElement) confirmationModalElement.addEventListener('hidden.bs.modal', localHandleConfigCancel, { once: true });
+         // Ensure no duplicate listeners by adding the specific handler function with 'once: true'
+         // This is the standard and safest approach for single-action confirmations.
+         if(confirmProceedBtn) confirmProceedBtn.addEventListener('click', localHandleConfigConfirm, { once: true });
+         if(confirmCancelBtn) confirmCancelBtn.addEventListener('click', localHandleConfigCancel, { once: true });
+         // Handle manual close of the modal while config change is pending
+         if(confirmationModalElement) confirmationModalElement.addEventListener('hidden.bs.modal', localHandleConfigCancel, { once: true });
 
-            confirmationModal.show();
-        } else {
-            console.log("Timer stopped or no modal needed. Applying config directly.");
-            applyConfig(config);
-        }
+
+         confirmationModal.show(); // Show the modal AFTER attaching listeners
+
+
+     } else {
+         // Timer is stopped or no modal needed/initialized, apply config directly
+         console.log("Timer stopped or no modal needed. Applying config directly.");
+         applyConfig(config);
+     }
+ }
+
+ // Function to apply the selected configuration
+ function applyConfig(config) {
+     console.log("applyConfig called with config:", config);
+     // TODO: Add visual indication of the active config in the list (Add 'active-config' class)
+     activeConfig = { work: config.work, break: config.break };
+     stopTimer(); // Stop and reset the timer based on the NEW active config
+     timeRemaining = activeConfig.work * 60;
+     updateDisplay();
+     pendingConfig = null; // Clear pending config after applying
+     console.log("Configuration applied:", activeConfig);
+
+      // If edit form is open, close it after applying a config
+     if (editConfigForm && editConfigForm.style.display !== 'none') {
+          cancelEditingConfig();
+     }
+     // Reset confirmation modal text back to default config change message/buttons
+     resetConfirmationModalText();
+ }
+
+// Functionality for editing configs
+function startEditingConfig(configId) {
+     console.log("startEditingConfig called for configId:", configId);
+     if (!editConfigForm || !editingConfigIdInput || !editWorkTimeInput || !editBreakTimeInput || !editConfigNameInput || !saveConfigBtn || !cancelEditBtn) {
+         console.warn("Missing edit config form elements.");
+         alert("Error: Missing edit form fields."); // Use modal later
+         return;
+     }
+
+     let configToEdit = null;
+     let isDefault = false;
+
+     if (configId.startsWith('default-')) {
+         configToEdit = defaultConfigs[configId];
+         isDefault = true;
+         // Default configs cannot be saved directly, hide save button
+         if(saveConfigBtn) saveConfigBtn.style.display = 'none';
+         // Default config names cannot be edited
+         if(editConfigNameInput) editConfigNameInput.disabled = true;
+         // Disable work/break time inputs for default configs too
+         if(editWorkTimeInput) editWorkTimeInput.disabled = true;
+         if(editBreakTimeInput) editBreakTimeInput.disabled = true;
+
+     } else if (configId.startsWith('custom-')) {
+         const index = parseInt(configId.replace('custom-', ''));
+          // --- Added check for customConfigs array existing ---
+          if (customConfigs && index >= 0 && index < customConfigs.length) {
+          // --- End Added check ---
+             configToEdit = customConfigs[index];
+             isDefault = false;
+             // Custom configs can be saved
+             if(saveConfigBtn) saveConfigBtn.style.display = '';
+             // Custom config names can be edited
+             if(editConfigNameInput) editConfigNameInput.disabled = false;
+             // Enable work/break time inputs for custom configs
+             if(editWorkTimeInput) editWorkTimeInput.disabled = false;
+             if(editBreakTimeInput) editBreakTimeInput.disabled = false;
+          } else {
+             console.error("Custom config not found in array for editing:", index);
+             alert("Error: Custom config not found."); // Use modal later
+             return; // Exit if custom config not found
+          }
+     } else {
+          console.warn("Invalid config ID format for editing:", configId);
+          alert("Error: Invalid configuration selected for editing."); // Use modal later
+          return; // Exit if ID format is wrong
+     }
+
+
+     // If configToEdit was found (either default or custom)
+     if (configToEdit) {
+         if(editingConfigIdInput) editingConfigIdInput.value = configId;
+         if(editWorkTimeInput) editWorkTimeInput.value = configToEdit.work;
+         if(editBreakTimeInput) editBreakTimeInput.value = configToEdit.break;
+         if(editConfigNameInput) editConfigNameInput.value = configToEdit.name || ''; // Use || '' to handle undefined name
+
+         // Show the edit form
+         if(editConfigForm) editConfigForm.style.display = 'block';
+         console.log("Edit form shown for config:", configToEdit);
+     } else {
+         // This else block should ideally not be reached if the checks above are correct
+         console.error("ConfigToEdit is null after lookup, despite ID check.");
+     }
+ }
+
+
+ function saveEditedConfig() {
+    console.log("saveEditedConfig called.");
+     // Check if necessary form elements exist
+    if (!editConfigForm || !editingConfigIdInput || !editWorkTimeInput || !editBreakTimeInput || !editConfigNameInput) {
+        console.warn("Missing edit config form elements for saving.");
+        alert("Error: Missing edit form fields."); // Use modal later
+        return;
     }
 
-    function applyConfig(config) {
-        console.log("applyConfig called with config:", config);
-        activeConfig = { work: config.work, break: config.break };
-        stopTimer();
-        timeRemaining = activeConfig.work * 60;
-        updateDisplay();
-        pendingConfig = null;
-        console.log("Configuration applied:", activeConfig);
+    const configId = editingConfigIdInput.value;
+    const work = parseInt(editWorkTimeInput.value);
+    const breakTime = parseInt(editBreakTimeInput.value);
+    const name = editConfigNameInput.value.trim();
 
-        if (editConfigForm && editConfigForm.style.display !== 'none') {
-            cancelEditingConfig();
-        }
-        resetConfirmationModalText();
+     // Basic validation for input values
+     if (isNaN(work) || work <= 0 || isNaN(breakTime) || breakTime <= 0) {
+        alert("Please enter valid positive numbers for work and break times."); // Use Bootstrap modal later
+        return;
     }
 
-    function startEditingConfig(configId) {
-        console.log("startEditingConfig called for configId:", configId);
-        if (!editConfigForm || !editingConfigIdInput || !editWorkTimeInput || !editBreakTimeInput || !editConfigNameInput || !saveConfigBtn || !cancelEditBtn) {
-            console.warn("Missing edit config form elements.");
-            return;
-        }
+    // Only allow saving for custom configs
+    if (configId.startsWith('custom-')) {
+         const index = parseInt(configId.replace('custom-', ''));
+         // --- Added check for customConfigs array existing and index validity ---
+         if (customConfigs && index >= 0 && index < customConfigs.length) {
+         // --- End Added check ---
+             // Check if updated config duplicates an existing one (excluding itself)
+             const isDuplicate = customConfigs.some((config, i) =>
+                 i !== index && config.work === work && config.break === breakTime && config.name === name
+             );
 
-        let configToEdit = null;
-        let isDefault = false;
+             if (isDuplicate) {
+                 alert("A custom configuration with these values and name already exists."); // Use modal
+                 return;
+             }
 
-        if (configId.startsWith('default-')) {
-            configToEdit = defaultConfigs[configId];
-            isDefault = true;
-            if (saveConfigBtn) saveConfigBtn.style.display = 'none';
-            if (editConfigNameInput) editConfigNameInput.disabled = true;
-        } else if (configId.startsWith('custom-')) {
-            const index = parseInt(configId.replace('custom-', ''));
-            if (customConfigs[index]) {
-                configToEdit = customConfigs[index];
-                isDefault = false;
-                if (saveConfigBtn) saveConfigBtn.style.display = '';
-                if (editConfigNameInput) editConfigNameInput.disabled = false;
-            }
-        }
+             // Update the config in the customConfigs array
+             customConfigs[index].work = work;
+             customConfigs[index].break = breakTime;
+             customConfigs[index].name = name;
 
-        if (configToEdit) {
-            if (editingConfigIdInput) editingConfigIdInput.value = configId;
-            if (editWorkTimeInput) editWorkTimeInput.value = configToEdit.work;
-            if (editBreakTimeInput) editBreakTimeInput.value = configToEdit.break;
-            if (editConfigNameInput) editConfigNameInput.value = configToEdit.name || '';
-            if (editConfigForm) editConfigForm.style.display = 'block';
-            console.log("Edit form shown for config:", configToEdit);
-        } else {
-            console.error("Config not found for editing:", configId);
-        }
+             saveCustomConfigs(); // Save updated custom configs to localStorage
+             renderConfigs(); // Re-render the list to show updated config
+             console.log("Custom config updated:", customConfigs[index]);
+             // TODO: If the updated config was the active one, update the timer display? Or ask to apply?
+             // If active config matches the updated one, apply the changes visually/functionally
+              if (activeConfig && typeof activeConfig === 'object' && activeConfig.work === customConfigs[index].work && activeConfig.break === customConfigs[index].break && activeConfig.name === customConfigs[index].name) {
+                   console.log("Updated custom config is the active one. Applying changes.");
+                   // Stop timer and re-apply the updated config values
+                   stopTimer(); // Stop and reset based on old config
+                   activeConfig = { ...customConfigs[index] }; // Update active config object
+                   timeRemaining = activeConfig.work * 60; // Set time based on updated work time
+                   updateDisplay(); // Update display
+                   console.log("Active config updated to:", activeConfig);
+                   // Note: If timer was running, this stops it. Could ask user if they want to apply/restart.
+               }
+         } else {
+              console.error("Custom config not found for saving:", index);
+              alert("Error: Config to edit not found."); // Use modal later
+         }
+    } else if (configId.startsWith('default-')) {
+        console.warn("Attempted to save a default config edit. This action is not allowed.");
+        alert("Cannot save default configurations."); // Use modal later
+    } else {
+         console.warn("Save attempted with invalid config ID format:", configId);
+         alert("Error: Invalid configuration ID for saving."); // Use modal later
     }
+     cancelEditingConfig(); // Close the edit form after saving
+ }
 
-    function saveEditedConfig() {
-        console.log("saveEditedConfig called.");
-        if (!editConfigForm || !editingConfigIdInput || !editWorkTimeInput || !editBreakTimeInput || !editConfigNameInput) {
-            console.warn("Missing edit config form elements for saving.");
-            return;
-        }
-
-        const configId = editingConfigIdInput.value;
-        const work = parseInt(editWorkTimeInput.value);
-        const breakTime = parseInt(editBreakTimeInput.value);
-        const name = editConfigNameInput.value.trim();
-
-        if (isNaN(work) || work <= 0 || isNaN(breakTime) || breakTime <= 0) {
-            alert("Please enter valid positive numbers for work and break times.");
-            return;
-        }
-
-        if (configId.startsWith('custom-')) {
-            const index = parseInt(configId.replace('custom-', ''));
-            if (customConfigs[index]) {
-                const isDuplicate = customConfigs.some((config, i) =>
-                    i !== index && config.work === work && config.break === breakTime && config.name === name
-                );
-
-                if (isDuplicate) {
-                    alert("A custom configuration with these values and name already exists.");
-                    return;
-                }
-
-                customConfigs[index].work = work;
-                customConfigs[index].break = breakTime;
-                customConfigs[index].name = name;
-                saveCustomConfigs();
-                renderConfigs();
-                console.log("Custom config updated:", customConfigs[index]);
-            } else {
-                console.error("Custom config not found for saving:", index);
-            }
-        } else if (configId.startsWith('default-')) {
-            console.log("Attempted to save a default config edit - this should not happen with save button hidden.");
-        }
-        cancelEditingConfig();
-    }
-
-    function cancelEditingConfig() {
-        console.log("cancelEditingConfig called.");
-        if (editConfigForm) editConfigForm.style.display = 'none';
-    }
+ function cancelEditingConfig() {
+     console.log("cancelEditingConfig called.");
+     // Reset input values in case user edited but cancelled? Optional.
+     // if(editWorkTimeInput) editWorkTimeInput.value = '';
+     // if(editBreakTimeInput) editBreakTimeInput.value = '';
+     // if(editConfigNameInput) editConfigNameInput.value = '';
+     if (editConfigForm) editConfigForm.style.display = 'none'; // Hide the edit form
+ }
 
     // --- Music Mode Functions ---
 
