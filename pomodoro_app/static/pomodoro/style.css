@@ -1,24 +1,20 @@
 /* D:\artimes-hyperion\pomodoro_app\static\pomodoro\style.css */
 
-/* Sidebar base styles matching StudyWithMe aesthetic */
+/* Sidebar base styles */
 .sidebar {
     width: 320px;
     z-index: 1050;
     height: 100vh;
-    /* Use flexbox for layout control: timer/content */
     display: flex;
     flex-direction: column;
-    /* Allow content area to scroll */
     overflow-y: auto;
-    /* Clean, subtle shadow */
     box-shadow: -6px 0 12px rgba(0, 0, 0, 0.5);
-    /* Solid dark background */
-    background-color: #1e1e1e;
+    background-color: #1E1E1E;
     transition: transform 0.3s ease-in-out;
-    color: #e0e0e0;
+    color: #E0E0E0;
     border-left: 1px solid rgba(255, 255, 255, 0.08);
     transform: translateX(100%);
-    padding: 0 !important; /* Remove default padding */
+    padding: 0 !important;
 }
 
 .sidebar.visible {
@@ -27,223 +23,206 @@
 
 /* Timer widget container */
 #timerWidgetContainer {
-    width: calc(100% - 40px); /* Match sidebar content horizontal padding */
-    margin: 20px auto; /* Center horizontally and add top/bottom margin */
-    flex-shrink: 0; /* Prevent it from shrinking */
+    width: calc(100% - 40px);
+    margin: 20px auto;
+    flex-shrink: 0;
 }
 
-/* Styling for the timer widget - Central block matching StudyWithMe Timer Aesthetic */
-#timerWidget { /* Use the ID for the container */
+/* Styling for the timer widget */
+#timerWidget {
     position: relative;
-    width: 100%; /* Fill its container (#timerWidgetContainer) */
-    min-height: 150px; /* Sufficient height for the large clock and buttons */
+    width: 100%;
+    min-height: 150px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center; /* Center content vertically */
+    justify-content: center;
     text-align: center;
-    background-color: #282828; /* Dark background */
-    color: white;
-    padding: 15px 20px; /* Padding inside the widget */
-    border-radius: 10px; /* Rounded corners */
-    border: 1px solid rgba(255, 255, 255, 0.08); /* Subtle border */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Subtle shadow */
-    z-index: 1; /* Ensure it's above regular content but below modals */
+    background-color: #282828;
+    color: #E0E0E0;
+    padding: 15px 20px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    z-index: 1;
 }
 
 #timerWidget #displayTime {
-    font-size: 4em; /* Large font for the time */
+    font-size: 4em;
     font-weight: bold;
-    margin-bottom: 8px; /* Space between time and buttons */
+    margin-bottom: 8px;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
-    color: #ffffff; /* White color for the time */
-    line-height: 1; /* Compact line height */
+    color: #FFFFFF;
+    line-height: 1;
 }
 
 #timerWidget .timer-controls {
     display: flex;
-    justify-content: center; /* Center buttons horizontally */
-    align-items: center;
-    width: 100%; /* Make controls span the width of the widget */
-}
-
-#timerWidget .timer-controls .btn {
-    font-size: 1em;
-    padding: 0.5rem 1.2rem; /* Button padding */
-    border-radius: 20px; /* Pill-like shape */
-    font-weight: normal;
-    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
-     /* Match StudyWithMe timer button style (white background, dark text) */
-    background-color: #eeeeee;
-    border: 1px solid #cccccc;
-    color: #1e1e1e;
-    flex-grow: 0; /* Prevent buttons from stretching */
-    flex-shrink: 0; /* Prevent buttons from shrinking too much */
-}
-#timerWidget .timer-controls .btn:hover {
-    background-color: #ffffff;
-    border-color: #dddddd;
-    color: #000000;
-}
-/* Add margin between timer control buttons */
-#timerWidget .timer-controls .btn:not(:last-child) {
-    margin-right: 10px; /* Space between buttons */
-}
-
-
-/* --- Sidebar Content Area --- */
-/* This flex-grows to push any trailing content down if sidebar is tall */
-.sidebar-content {
-    flex-grow: 1;
-    padding: 0 20px; /* Horizontal padding matching timer container */
-    padding-bottom: 30px; /* Bottom padding below content */
-    overflow-y: auto; /* Allow content area itself to scroll if it overflows */
-    /* Ensure content starts visually below the timer widget */
-    /* No padding-top needed here because timerWidgetContainer provides margin */
-}
-
-/* Style for the Close Button */
-#closeSidebarBtn {
-    z-index: 1051; /* Ensure it's above everything else */
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    padding: 8px;
-    filter: invert(0.9) grayscale(100%); /* Make it almost white */
-    opacity: 0.6; /* Slightly transparent */
-    transition: opacity 0.2s ease;
-}
-#closeSidebarBtn:hover {
-    opacity: 1; /* Fully opaque on hover */
-}
-
-
-/* --- Music Mode Section Styling (Matching Music Bar Screenshot) --- */
-#musicModeSection { /* Use the ID */
-    background-color: #282828; /* Match timer/list item background */
-    border: 1px solid rgba(255, 255, 255, 0.08); /* Subtle border */
-    border-radius: 8px; /* Rounded corners */
-    padding: 15px; /* Inner padding */
-    margin-bottom: 20px; /* Space below the section */
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow */
-    display: flex; /* Use flexbox for layout within the section */
-    flex-direction: column; /* Stack elements vertically */
-}
-
-#musicModeSection .form-label {
-    color: #e0e0e0; /* Light label color */
-    font-size: 0.9em;
-    margin-bottom: 5px;
-}
-
-#musicModeSection .form-control-sm {
-    background-color: #1e1e1e; /* Darker input background */
-    color: #e0e0e0; /* Light text */
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 4px;
-    padding: 0.4rem 0.8rem;
-}
-#musicModeSection .form-control-sm:focus {
-     background-color: #1e1e1e;
-     color: #e0e0e0;
-     border-color: #8379f0; /* Accent color focus border */
-     box-shadow: 0 0 0 0.25rem rgba(131, 121, 240, 0.25); /* Accent color focus shadow */
-}
-
-/* Container for Load button and music controls */
-#musicModeSection .music-controls-container { /* Added a class to target this div specifically */
-    display: flex;
-    justify-content: space-between; /* Space out the load button and controls */
+    justify-content: center;
     align-items: center;
     width: 100%;
 }
 
+#timerWidget .timer-controls .btn {
+    font-size: 1em;
+    padding: 0.5rem 1.2rem;
+    border-radius: 20px;
+    font-weight: normal;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    background-color: #444;
+    border: 1px solid #555;
+    color: #E0E0E0;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+#timerWidget .timer-controls .btn:hover {
+    background-color: #555;
+    border-color: #666;
+    color: #FFFFFF;
+}
+
+#timerWidget .timer-controls .btn:not(:last-child) {
+    margin-right: 10px;
+}
+
+/* Sidebar Content Area */
+.sidebar-content {
+    flex-grow: 1;
+    padding: 0 20px;
+    padding-bottom: 30px;
+    overflow-y: auto;
+}
+
+/* Style for the Close Button */
+#closeSidebarBtn {
+    z-index: 1051;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    padding: 8px;
+    filter: invert(0.9) grayscale(100%);
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
+}
+
+#closeSidebarBtn:hover {
+    opacity: 1;
+}
+
+/* Music Mode Section Styling */
+#musicModeSection {
+    background-color: #1E1E1E;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    color: #E0E0E0;
+}
+
+#musicModeSection .form-label {
+    color: #E0E0E0;
+    font-size: 1em;
+    margin-bottom: 10px;
+}
+
+#musicModeSection .form-control-sm {
+    background-color: #2C2C2C;
+    color: #E0E0E0;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+}
+
+#musicModeSection .form-control-sm:focus {
+    border-color: #8379F0;
+    box-shadow: 0 0 0 0.2rem rgba(131, 121, 240, 0.25);
+}
+
 #musicModeSection .btn-sm {
-    padding: 0.3rem 0.7rem;
-    border-radius: 4px;
+    padding: 0.4rem 1rem;
+    border-radius: 5px;
     font-size: 0.9em;
 }
-#musicModeSection .btn-primary { /* Load Theme button */
-     background-color: #8379f0;
-     border-color: #8379f0;
-     color: white;
+
+#musicModeSection .btn-primary {
+    background-color: #8379F0;
+    border-color: #8379F0;
+    color: #FFFFFF;
 }
+
 #musicModeSection .btn-primary:hover {
-    background-color: #6a5acd;
-    border-color: #6a5acd;
+    background-color: #6A5ACD;
+    border-color: #6A5ACD;
 }
-#musicModeSection .btn-secondary { /* Play/Pause button */
-     background-color: #444;
-     border-color: #555;
-     color: #e0e0e0;
+
+#musicModeSection .btn-secondary {
+    background-color: #444;
+    border-color: #555;
+    color: #E0E0E0;
 }
+
 #musicModeSection .btn-secondary:hover {
     background-color: #555;
     border-color: #666;
-    color: #ffffff;
 }
 
-/* Style for the inner music controls (Play/Pause, etc.) */
 #musicModeSection .music-controls {
     display: flex;
+    justify-content: center;
     align-items: center;
-    justify-content: center; /* Center the control buttons */
-    flex-grow: 1; /* Allow controls area to grow if needed */
-    /* Add some space between the Load button and the controls */
-    margin-left: 10px;
-}
-/* Add margin between music control buttons if there were more */
-#musicModeSection .music-controls .btn:not(:last-child) {
-    margin-right: 5px;
+    margin-top: 10px;
 }
 
+#musicModeSection .music-controls .btn {
+    margin: 0 5px;
+}
 
 #currentTrackInfo {
-    font-size: 0.8em;
-    color: #aaa;
+    font-size: 0.9em;
+    color: #AAA;
     margin-top: 10px;
-    word-break: break-all;
-    text-align: center; /* Center track info */
-    width: 100%; /* Span full width */
+    text-align: center;
 }
+
 #currentTrackInfo #trackTitle {
     font-weight: bold;
-    color: #e0e0e0;
+    color: #E0E0E0;
 }
 
-
-/* --- Styling for Modern Switches --- */
-/* Adjust switch colors to fit the StudyWithMe theme */
+/* Styling for Modern Switches */
 .form-switch .form-check-input {
-     background-color: #444; /* Darker grey when unchecked */
-     border-color: #555;
-     flex-shrink: 0; /* Prevent shrinking in flex containers */
-     width: 2em; /* Standard switch width */
-     height: 1em; /* Standard switch height */
-     margin-right: 0.5em; /* Space between switch and label */
-     background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3E<circle r='3' fill='%23e0e0e0'/></svg>"); /* Light circle for unchecked */
-     background-position: left center;
-     background-size: contain;
-     background-repeat: no-repeat;
-     transition: background-position .15s ease-in-out;
+    background-color: #444;
+    border-color: #555;
+    flex-shrink: 0;
+    width: 2em;
+    height: 1em;
+    margin-right: 0.5em;
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3E<circle r='3' fill='%23E0E0E0'/></svg>");
+    background-position: left center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    transition: background-position .15s ease-in-out;
 }
+
 .form-switch .form-check-input:checked {
-    background-color: #8379f0; /* Accent color */
-    border-color: #8379f0;
-    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3E<circle r='3' fill='%23fff'/></svg>"); /* White circle for checked */
+    background-color: #8379F0;
+    border-color: #8379F0;
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3E<circle r='3' fill='%23FFFFFF'/></svg>");
     background-position: right center;
 }
+
 .form-check-label {
-    color: #e0e0e0;
-    flex-grow: 1; /* Allow label to take space */
-    cursor: pointer; /* Indicate clickable */
+    color: #E0E0E0;
+    flex-grow: 1;
+    cursor: pointer;
 }
 
-
-/* Dark theme adjustments for other Bootstrap components - Matching StudyWithMe Aesthetic */
+/* Dark theme adjustments for other Bootstrap components */
 .list-group-item-dark {
-    background-color: #282828; /* Match timer/music background */
-    color: #e0e0e0;
+    background-color: #282828;
+    color: #E0E0E0;
     border: 1px solid rgba(255, 255, 255, 0.08);
     margin-bottom: 10px;
     border-radius: 8px;
@@ -251,82 +230,99 @@
     position: relative;
     overflow: hidden;
     box-shadow: none;
-    padding: 15px; /* Padding inside list items */
+    padding: 15px;
 }
 
 .list-group-item-dark:hover {
-    background-color: #3a3a4a; /* Darker background on hover */
+    background-color: #3A3A4A;
     cursor: pointer;
     transform: none;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3); /* Subtle shadow on hover */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
-/* Remove the ::before border on hover */
 .list-group-item-dark:hover::before {
     content: none;
 }
 
-/* Styles for elements within list items */
-.list-group-item-dark h6 { color: #ffffff; margin-bottom: 2px; font-size: 1em; }
-.list-group-item-dark small { color: #bdbdbd; font-size: 0.8em; }
-.list-group-item-dark p.text-muted.small { color: #bdbdbd !important; font-style: normal; }
+.list-group-item-dark h6 {
+    color: #FFFFFF;
+    margin-bottom: 2px;
+    font-size: 1em;
+}
 
-/* Style for buttons within list items (Edit/Delete) */
+.list-group-item-dark small {
+    color: #BDBDBD;
+    font-size: 0.8em;
+}
+
+.list-group-item-dark p.text-muted.small {
+    color: #BDBDBD !important;
+    font-style: normal;
+}
+
 .list-group-item-dark .btn-outline-secondary,
 .list-group-item-dark .btn-outline-danger {
-    padding: 0.25rem 0.75rem; /* Smaller padding */
-    font-size: 0.8em; /* Smaller font */
-    border-radius: 4px; /* Less rounded */
+    padding: 0.25rem 0.75rem;
+    font-size: 0.8em;
+    border-radius: 4px;
     transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
+
 .list-group-item-dark .btn-outline-secondary {
-     color: #e0e0e0;
-     border-color: rgba(255, 255, 255, 0.2);
+    color: #E0E0E0;
+    border-color: rgba(255, 255, 255, 0.2);
 }
+
 .list-group-item-dark .btn-outline-secondary:hover {
     background-color: rgba(255, 255, 255, 0.1);
-    color: #ffffff;
+    color: #FFFFFF;
     border-color: rgba(255, 255, 255, 0.3);
 }
+
 .list-group-item-dark .btn-outline-danger {
-     color: #dc3545;
-     border-color: rgba(220, 53, 69, 0.5);
+    color: #DC3545;
+    border-color: rgba(220, 53, 69, 0.5);
 }
+
 .list-group-item-dark .btn-outline-danger:hover {
     background-color: rgba(220, 53, 69, 0.1);
-    color: #e0e0e0;
+    color: #E0E0E0;
     border-color: rgba(220, 53, 69, 0.7);
 }
 
-
-.form-control-sm { /* Redundant with music section, but keep for general use */
+.form-control-sm {
     background-color: #282828;
-    color: #e0e0e0;
+    color: #E0E0E0;
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 8px;
     padding: 0.5rem 1rem;
     box-shadow: none;
 }
+
 .form-control-sm:focus {
     background-color: #282828;
-    color: #e0e0e0;
-    border-color: #8379f0;
+    color: #E0E0E0;
+    border-color: #8379F0;
     box-shadow: 0 0 0 0.25rem rgba(131, 121, 240, 0.25);
 }
-.form-control-sm::placeholder { color: #aaa; opacity: 1; }
 
+.form-control-sm::placeholder {
+    color: #AAA;
+    opacity: 1;
+}
 
 /* Headers within the sidebar content */
-.sidebar-content h5, .sidebar-content h6 {
-    color: #f8f9fa;
+.sidebar-content h5,
+.sidebar-content h6 {
+    color: #FFFFFF;
     margin-top: 2rem;
     margin-bottom: 1rem;
     position: relative;
     padding-bottom: 5px;
 }
 
-/* Style for the subtle line below headers */
-.sidebar-content h5::after, .sidebar-content h6::after {
+.sidebar-content h5::after,
+.sidebar-content h6::after {
     content: '';
     display: block;
     width: 100%;
@@ -340,7 +336,7 @@
 }
 
 .form-check-label {
-    color: #e0e0e0;
+    color: #E0E0E0;
 }
 
 .saved-custom-configs {
@@ -354,98 +350,105 @@
     box-shadow: none;
 }
 
-/* Custom scrollbar styles (Optional - for Webkit) */
-.saved-custom-configs::-webkit-scrollbar { width: 8px; }
-.saved-custom-configs::-webkit-scrollbar-track { background: #282828; border-radius: 4px; }
-.saved-custom-configs::-webkit-scrollbar-thumb { background: #555; border-radius: 4px; }
-.saved-custom-configs::-webkit-scrollbar-thumb:hover { background: #666; }
+.saved-custom-configs::-webkit-scrollbar {
+    width: 8px;
+}
 
+.saved-custom-configs::-webkit-scrollbar-track {
+    background: #282828;
+    border-radius: 4px;
+}
 
-/* Adjust modal content - Matching StudyWithMe modal style */
+.saved-custom-configs::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 4px;
+}
+
+.saved-custom-configs::-webkit-scrollbar-thumb:hover {
+    background: #666;
+}
+
+/* Adjust modal content */
 .modal-content.bg-dark {
     background-color: #282828;
-    color: #e0e0e0;
+    color: #E0E0E0;
     border: none;
     box-shadow: 0 5px 25px rgba(0, 0, 0, 0.8);
     border-radius: 10px;
 }
-.modal-header.border-0 { border-bottom: none !important; }
-.modal-footer.border-0 { border-top: none !important; }
 
-/* Buttons within the modal - Match StudyWithMe button style (rounded) */
+.modal-header.border-0 {
+    border-bottom: none !important;
+}
+
+.modal-footer.border-0 {
+    border-top: none !important;
+}
+
+/* Buttons within the modal */
 .modal-footer .btn {
     border-radius: 20px;
     padding: 0.5rem 1.5rem;
     font-weight: normal;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
-.modal-footer .btn-primary { /* Primary action button (OK, Save Changes, Yes) */
-     background-color: #8379f0;
-     border-color: #8379f0;
-     color: white;
-     /* Added transition */
-     transition: background-color 0.2s ease, border-color 0.2s ease;
+
+.modal-footer .btn-primary {
+    background-color: #8379F0;
+    border-color: #8379F0;
+    color: #FFFFFF;
 }
+
 .modal-footer .btn-primary:hover {
-    background-color: #6a5acd;
-    border-color: #6a5acd;
+    background-color: #6A5ACD;
+    border-color: #6A5ACD;
 }
 
-.modal-footer .btn-secondary { /* Secondary action button (Cancel, Close, No) */
-     background-color: #444;
-     border-color: #555;
-     color: #e0e0e0;
-      /* Added transition */
-     transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+.modal-footer .btn-secondary {
+    background-color: #444;
+    border-color: #555;
+    color: #E0E0E0;
 }
+
 .modal-footer .btn-secondary:hover {
-     background-color: #5a5a5a;
-     border-color: #6a6a6a;
-     color: #ffffff;
+    background-color: #555;
+    border-color: #666;
+    color: #FFFFFF;
 }
 
-/* Specific modal button styles based on context (Success/Danger from Bootstrap) */
-.modal-footer .btn-success { /* Used for 'Yes, Add Time' in regain modal */
-     background-color: #28a745;
-     border-color: #28a745;
-     color: white;
-     transition: background-color 0.2s ease, border-color 0.2s ease;
+.modal-footer .btn-success {
+    background-color: #28A745;
+    border-color: #28A745;
+    color: #FFFFFF;
 }
+
 .modal-footer .btn-success:hover {
-     background-color: #218838;
-     border-color: #1e7e34;
+    background-color: #218838;
+    border-color: #1E7E34;
 }
 
-.modal-footer .btn-danger { /* Used for 'No, Discard Time' in regain modal */
-     background-color: #dc3545;
-     border-color: #dc3545;
-     color: white;
-     transition: background-color 0.2s ease, border-color 0.2s ease;
+.modal-footer .btn-danger {
+    background-color: #DC3545;
+    border-color: #DC3545;
+    color: #FFFFFF;
 }
+
 .modal-footer .btn-danger:hover {
-     background-color: #c82333;
-     border-color: #bd2130;
+    background-color: #C82333;
+    border-color: #BD2130;
 }
-
 
 /* Tooltip style adjustments */
 .tooltip-inner {
     background-color: #495057;
-    color: #f8f9fa;
+    color: #F8F9FA;
     opacity: 1;
     border-radius: 4px;
 }
+
 .tooltip .tooltip-arrow::before {
     border-top-color: #495057 !important;
-     border-bottom-color: #495057 !important;
-     border-left-color: #495057 !important;
-     border-right-color: #495057 !important;
+    border-bottom-color: #495057 !important;
+    border-left-color: #495057 !important;
+    border-right-color: #495057 !important;
 }
-
-/* --- Main Content Area (adjust margin only when sidebar is visible) --- */
-/* If the sidebar is an overlay, no margin is needed on the main content wrapper. */
-/* If it pushes content, add a class to body/main-page-wrapper when sidebar is visible */
-/* Example if sidebar pushes: */
-/* body.sidebar-visible .main-page-wrapper {
-    margin-right: 320px;
-    transition: margin-right 0.3s ease-in-out;
-} */
