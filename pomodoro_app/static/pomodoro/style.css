@@ -1,3 +1,5 @@
+/* D:\artimes-hyperion\pomodoro_app\static\pomodoro\style.css */
+
 /* Sidebar base styles matching the aesthetic */
 .sidebar {
     width: 320px;
@@ -7,9 +9,9 @@
     flex-direction: column;
     overflow-y: auto;
     box-shadow: -6px 0 12px rgba(0, 0, 0, 0.5);
-    background-color: #121212;
+    background-color: #0A0A0A; /* Amoled Discord Dark */
     transition: transform 0.3s ease-in-out;
-    color: #B0BEC5;
+    color: #DCDDDE; /* Light text */
     border-left: 1px solid rgba(255, 255, 255, 0.08);
     transform: translateX(100%);
     padding: 0 !important;
@@ -36,8 +38,8 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    background-color: #1E2525;
-    color: #B0BEC5;
+    background-color: #181818; /* Slightly lighter dark */
+    color: #DCDDDE;
     padding: 15px 20px;
     border-radius: 8px;
     border: 1px solid rgba(255, 255, 255, 0.08);
@@ -50,7 +52,7 @@
     font-weight: bold;
     margin-bottom: 8px;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
-    color: #ffffff;
+    color: #ffffff; /* Pure white for time */
     line-height: 1;
 }
 
@@ -67,16 +69,16 @@
     border-radius: 20px;
     font-weight: normal;
     transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
-    background-color: #37474F;
-    border: 1px solid #455A64;
-    color: #B0BEC5;
+    background-color: #5865F2; /* Discord Purple */
+    border: 1px solid #5865F2;
+    color: #ffffff;
     flex-grow: 0;
     flex-shrink: 0;
 }
 
 #timerWidget .timer-controls .btn:hover {
-    background-color: #455A64;
-    border-color: #546E7A;
+    background-color: #4752C4; /* Darker Purple */
+    border-color: #4752C4;
     color: #ffffff;
 }
 
@@ -99,7 +101,7 @@
     top: 15px;
     right: 15px;
     padding: 8px;
-    filter: invert(0.9) grayscale(100%);
+    filter: invert(1); /* Keep white close button */
     opacity: 0.6;
     transition: opacity 0.2s ease;
 }
@@ -110,7 +112,7 @@
 
 /* Music Mode Section Styling */
 #musicModeSection {
-    background-color: #1E2525;
+    background-color: #181818; /* Match widget background */
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 8px;
     padding: 15px;
@@ -121,24 +123,24 @@
 }
 
 #musicModeSection .form-label {
-    color: #B0BEC5;
+    color: #DCDDDE; /* Light text */
     font-size: 0.9em;
     margin-bottom: 5px;
 }
 
 #musicModeSection .form-control-sm {
-    background-color: #263238;
-    color: #B0BEC5;
+    background-color: #202225; /* Darker grey for input */
+    color: #DCDDDE; /* Light text */
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 4px;
     padding: 0.4rem 0.8rem;
 }
 
 #musicModeSection .form-control-sm:focus {
-    background-color: #263238;
-    color: #B0BEC5;
-    border-color: #4CAF50;
-    box-shadow: 0 0 0 0.25rem rgba(76, 175, 80, 0.25);
+    background-color: #202225;
+    color: #DCDDDE;
+    border-color: #5865F2; /* Discord Purple focus */
+    box-shadow: 0 0 0 0.25rem rgba(88, 101, 242, 0.25);
 }
 
 #musicModeSection .music-controls-container {
@@ -155,58 +157,90 @@
 }
 
 #musicModeSection .btn-primary {
-    background-color: #4CAF50;
-    border-color: #4CAF50;
+    background-color: #5865F2; /* Discord Purple */
+    border-color: #5865F2;
     color: #ffffff;
 }
 
 #musicModeSection .btn-primary:hover {
-    background-color: #43A047;
-    border-color: #43A047;
-}
-
-#musicModeSection .btn-secondary {
-    background-color: #37474F;
-    border-color: #455A64;
-    color: #B0BEC5;
-}
-
-#musicModeSection .btn-secondary:hover {
-    background-color: #455A64;
-    border-color: #546E7A;
+    background-color: #4752C4; /* Darker Purple */
+    border-color: #4752C4;
     color: #ffffff;
 }
 
-#musicModeSection .music-controls {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-grow: 1;
-    margin-left: 10px;
+#musicModeSection .btn-secondary {
+    background-color: #303030; /* Darker grey */
+    border-color: #404040;
+    color: #DCDDDE;
 }
 
-#musicModeSection .music-controls .btn:not(:last-child) {
-    margin-right: 5px;
+#musicModeSection .btn-secondary:hover {
+    background-color: #404040;
+    border-color: #505050;
+    color: #ffffff;
 }
 
-#currentTrackInfo {
-    font-size: 0.8em;
-    color: #90A4AE;
-    margin-top: 10px;
-    word-break: break-word;
-    text-align: center;
+/* Styles for the new Music Player Display Area */
+#musicPlayerDisplay {
+    background-color: #202225; /* Darker grey, like input */
+    border-radius: 8px;
+    padding: 10px 15px;
+    margin-top: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
     width: 100%;
 }
 
-#currentTrackInfo #trackTitle {
+#musicPlayerDisplay #albumArt {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+#musicPlayerDisplay #currentTrackInfo {
+    margin-bottom: 5px;
+}
+
+#musicPlayerDisplay #trackTitle {
+    font-size: 1em;
+    color: #ffffff;
     font-weight: bold;
-    color: #B0BEC5;
+    line-height: 1.2;
+}
+
+#musicPlayerDisplay #trackArtist {
+    font-size: 0.85em;
+    color: #B9BBBE;
+    line-height: 1.2;
+}
+
+#musicPlayerDisplay .music-controls {
+    margin-top: 5px;
+}
+
+#musicPlayerDisplay .music-controls .btn {
+    font-size: 1.2em;
+    color: #B9BBBE;
+    transition: color 0.2s ease;
+}
+
+#musicPlayerDisplay .music-controls .btn:hover {
+    color: #DCDDDE;
+}
+
+#musicPlayerDisplay .music-controls #playPauseMusicBtn i {
+    font-size: 1.8em;
+    color: #ffffff;
+}
+
+#musicPlayerDisplay .music-controls #playPauseMusicBtn:hover i {
+    color: #DCDDDE;
 }
 
 /* Styling for Modern Switches */
 .form-switch .form-check-input {
-    background-color: #37474F;
-    border-color: #455A64;
+    background-color: #303030; /* Darker grey */
+    border-color: #404040;
     flex-shrink: 0;
     width: 2em;
     height: 1em;
@@ -219,22 +253,22 @@
 }
 
 .form-switch .form-check-input:checked {
-    background-color: #4CAF50;
-    border-color: #4CAF50;
+    background-color: #5865F2; /* Discord Purple */
+    border-color: #5865F2;
     background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='3' fill='%23fff'/></svg>");
     background-position: right center;
 }
 
 .form-check-label {
-    color: #B0BEC5;
+    color: #DCDDDE; /* Light text */
     flex-grow: 1;
     cursor: pointer;
 }
 
 /* Dark theme adjustments for other Bootstrap components */
 .list-group-item-dark {
-    background-color: #1E2525;
-    color: #B0BEC5;
+    background-color: #181818; /* Match widget background */
+    color: #DCDDDE; /* Light text */
     border: 1px solid rgba(255, 255, 255, 0.08);
     margin-bottom: 10px;
     border-radius: 8px;
@@ -246,24 +280,25 @@
 }
 
 .list-group-item-dark:hover {
-    background-color: #263238;
+    background-color: #202225; /* Darker grey on hover */
     cursor: pointer;
+    transform: none;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
 .list-group-item-dark h6 {
-    color: #ffffff;
+    color: #ffffff; /* White for title */
     margin-bottom: 2px;
     font-size: 1em;
 }
 
 .list-group-item-dark small {
-    color: #90A4AE;
+    color: #B9BBBE; /* Discord grey */
     font-size: 0.8em;
 }
 
 .list-group-item-dark p.text-muted.small {
-    color: #90A4AE !important;
+    color: #B9BBBE !important; /* Discord grey */
     font-style: normal;
 }
 
@@ -276,30 +311,30 @@
 }
 
 .list-group-item-dark .btn-outline-secondary {
-    color: #B0BEC5;
-    border-color: rgba(255, 255, 255, 0.2);
+    color: #B9BBBE; /* Discord grey */
+    border-color: rgba(255, 255, 255, 0.1);
 }
 
 .list-group-item-dark .btn-outline-secondary:hover {
     background-color: rgba(255, 255, 255, 0.1);
     color: #ffffff;
-    border-color: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.2);
 }
 
 .list-group-item-dark .btn-outline-danger {
-    color: #EF5350;
-    border-color: rgba(239, 83, 80, 0.5);
+    color: #F04747; /* Discord Red */
+    border-color: rgba(240, 71, 71, 0.5);
 }
 
 .list-group-item-dark .btn-outline-danger:hover {
-    background-color: rgba(239, 83, 80, 0.1);
+    background-color: rgba(240, 71, 71, 0.1);
     color: #ffffff;
-    border-color: rgba(239, 83, 80, 0.7);
+    border-color: rgba(240, 71, 71, 0.7);
 }
 
 .form-control-sm {
-    background-color: #263238;
-    color: #B0BEC5;
+    background-color: #202225; /* Darker grey */
+    color: #DCDDDE; /* Light text */
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 4px;
     padding: 0.5rem 1rem;
@@ -307,12 +342,69 @@
 }
 
 .form-control-sm:focus {
-    background-color: #263238;
-    color: #B0BEC5;
-    border-color: #4CAF50;
-    box-shadow: 0 0 0 0.25rem rgba(76, 175, 80, 0.25);
+    background-color: #202225;
+    color: #DCDDDE;
+    border-color: #5865F2; /* Discord Purple focus */
+    box-shadow: 0 0 0 0.25rem rgba(88, 101, 242, 0.25);
 }
 
 .form-control-sm::placeholder {
-    color: #90A4AE;
+    color: #B9BBBE; /* Discord grey placeholder */
+    opacity: 1;
+}
+
+/* Headers within the sidebar content */
+.sidebar-content h5,
+.sidebar-content h6 {
+    color: #ffffff; /* White for headers */
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    position: relative;
+    padding-bottom: 5px;
+}
+
+.sidebar-content h5::after,
+.sidebar-content h6::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.1);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-radius: 0;
+    margin-top: 0;
+}
+
+/* Ensure text-muted small paragraphs within the sidebar content are visible */
+.sidebar-content p.small.text-muted {
+    color: #B9BBBE !important; /* Discord grey */
+    display: block !important;
+    visibility: visible !important;
+}
+
+/* Ensure the "No custom configurations saved yet." text is visible */
+#savedCustomConfigs p.text-muted.small {
+    color: #B9BBBE !important; /* Discord grey */
+    display: block !important;
+    visibility: visible !important;
+    font-style: italic;
+    padding: 15px;
+    margin-bottom: 0;
+}
+
+/* Tooltip style adjustments */
+.tooltip-inner {
+    background-color: #303030; /* Darker grey */
+    color: #DCDDDE; /* Light text */
+    opacity: 1;
+    border-radius: 4px;
+}
+
+.tooltip .tooltip-arrow::before {
+    border-top-color: #303030 !important;
+    border-bottom-color: #303030 !important;
+    border-left-color: #303030 !important;
+    border-right-color: #303030 !important;
 }

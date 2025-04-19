@@ -17,15 +17,17 @@
     </div>
 
     <div class="sidebar-content">
-
         <h6 class="mt-4 mb-2 fw-bold">Music Mode</h6>
         <div id="musicModeSection" class="music-mode-section mb-4 p-3 rounded bg-secondary bg-opacity-10">
             <p class="small text-light">Crank up the volume!</p>
-            <div class="mb-3">
+
+            {# Existing Input, Load Button, YouTube Player, and initial Controls #}
+            <div class="mb-3"> {# This div wraps the input/label #}
                 <label for="youtubeLinkInput" class="form-label small fw-bold text-light">YouTube Link</label>
                 <input type="text" class="form-control form-control-sm bg-dark text-light border-secondary"
                        id="youtubeLinkInput" placeholder="Paste YouTube link...">
             </div>
+            {# This div wraps the load button, youtube player, and initial controls #}
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <button class="btn btn-sm btn-primary" id="loadMusicBtn">Load that track!</button>
                 <div id="youtube-player" style="display: none;"></div>
@@ -36,6 +38,42 @@
             <p class="small text-light mt-2" id="currentTrackInfo" style="display: none;">
                 Now playing: <span id="trackTitle"></span>
             </p>
+
+            {# --- ADD New structure for the displayed music player area AFTER the existing elements --- #}
+            {# This div will be shown by JavaScript when a track is loaded, hiding the input/load button #}
+            <div id="musicPlayerDisplay" class="d-flex align-items-center" style="display: none;">
+                {# Album Art Placeholder (Use a default image from your static files) #}
+                <img id="albumArt" src="{% static 'pomodoro/default_album_art.png' %}" alt="Album Art" class="me-3 rounded-start" style="width: 60px; height: 60px; object-fit: cover;">
+
+                {# Track Info and Controls Container #}
+                <div class="flex-grow-1 d-flex flex-column">
+                    {# Track Title and Artist #}
+                    <div class="mb-1 text-truncate">
+                        <div id="trackTitle" class="fw-bold text-light text-truncate">Track Title</div>
+                        <div id="trackArtist" class="small text-muted text-truncate">Artist Name</div> {# New ID for artist #}
+                    </div>
+
+                    {# Playback Controls #}
+                    <div class="music-controls d-flex align-items-center">
+                        {# Example Skip Back button #}
+                        <button class="btn btn-sm btn-link text-decoration-none text-light p-0 me-2"><i class="bi bi-skip-start-fill fs-5"></i></button>
+                        {# Play/Pause Button #}
+                        <button class="btn btn-sm btn-link text-decoration-none text-light p-0 mx-2" id="playPauseMusicBtn"><i class="bi bi-play-fill fs-4"></i></button>
+                        {# Example Skip Forward button #}
+                        <button class="btn btn-sm btn-link text-decoration-none text-light p-0 ms-2"><i class="bi bi-skip-end-fill fs-5"></i></button>
+
+                        {# Example Add/Options button (like the + and ...) #}
+                        <button class="btn btn-sm btn-link text-decoration-none text-light p-0 ms-3"><i class="bi bi-plus-circle fs-5"></i></button>
+                        <button class="btn btn-sm btn-link text-decoration-none text-light p-0 ms-1"><i class="bi bi-three-dots fs-5"></i></button>
+
+                        {# Placeholder for Spotify Icon (if desired) #}
+                        {# This would require an SVG or image #}
+                        {# <i class="bi bi-spotify fs-5 ms-auto"></i> #}
+                    </div>
+                </div>
+            </div>
+            {# --- End new structure --- #}
+
         </div>
 
         <h6 class="mt-4 mb-2 fw-bold">Configurations</h6>
@@ -125,9 +163,8 @@
             <label class="form-check-label text-light" for="focusRegainToggle">
                 Enable Focus Regain Timer
                 <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="right"
-                   title="Tracks time spent paused during a work session. You can choose to add this time back to your session to complete the full focus duration."></i>
+                   title="Tracks time spent paused during a work session. You can choose to add this time back to your session to complete the full focus goal."></i>
             </label>
         </div>
-
     </div>
 </div>
