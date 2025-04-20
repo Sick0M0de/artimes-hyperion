@@ -73,4 +73,5 @@ Built not to manage students... But to awaken the inner hunter within—focus wi
 ## 📜 License
 
 This project is licensed under the MIT License. Feel free to use, fork, or contribute to the madness—join the hunt!  
-**“Silence the world. Focus the chaos. Unleash your Hyperion—Dante would approve (with a stylish hair flip)!”**
+**“Silence the world. Focus the yourself. Unleash your Hyperion—Dante would approve (with a stylish hair flip)!”**
+
