@@ -39,9 +39,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'users',
-    'habits',
     'pomodoro_app',
-    'ai_engine',
+    'accounts',         # New app for authentication
+    'tasks',            # New app for tasks
+    'notes',            # New app for notes
+    'habits',           # New app for habit tracking
+    'mood_journal',     # New app for mood journaling
+    'dashboard'
+
 ]
 
 MIDDLEWARE = [
@@ -141,3 +146,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL = '/admin/login/' # Or your custom frontend login URL if you create one later
 LOGIN_REDIRECT_URL = '/admin/' # Default page after successful login (e.g., admin dashboard)
 LOGOUT_REDIRECT_URL = '/' # Page to redirect to after logging out (e.g., homepage or login page)
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # This will create a 'media' folder at project root
+LOGIN_URL = 'login' # Or use '/accounts/login/' if you prefer the full path
+
+# The URL to redirect to after a user successfully logs in (if they weren't accessing a protected page).
+# We want to send them to the dashboard.
+LOGIN_REDIRECT_URL = 'dashboard' # Or use '/dashboard/'

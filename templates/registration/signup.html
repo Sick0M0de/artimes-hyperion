@@ -1,14 +1,131 @@
-{% extends 'admin/base.html' %}  {# Or your base template if you have one #}
+{% extends 'base.html' %}
+{% load static %}
 {% load i18n %}
 
 {% block title %}{% translate 'Create user' %}{% endblock %}
 
-{% block content %}
-<p>{% translate "Please enter the following information to create your account:" %}</p>
+{% block extra_css %}
+<style>
+  body {
+    background-color: #1e1e1e;
+    color: white;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: sans-serif;
+  }
+  .signup-box {
+    width: 100%;
+    max-width: 400px;
+    padding: 40px 30px;
+    background-color: #2a2a2a;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    text-align: center;
+  }
+  .signup-box img {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px;
+    display: inline-block;
+    border-radius: 10px;
+    object-fit: cover;
+  }
+  .signup-box h2 {
+    font-weight: 700;
+    margin-bottom: 30px;
+    color: white;
+  }
+  .signup-box form p {
+      margin-bottom: 15px;
+      text-align: left;
+  }
+  .signup-box form p label {
+      display: block;
+      color: #ccc;
+      margin-bottom: .25rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+  }
+  .signup-box form p input[type="text"],
+  .signup-box form p input[type="password"],
+  .signup-box form p input[type="email"] {
+    background-color: #1e1e1e;
+    color: white;
+    border-radius: 10px;
+    border: 1px solid #555;
+    padding: 10px 15px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+   .signup-box form p input::placeholder {
+        color: #aaaaaa;
+        opacity: 1;
+    }
+  .signup-box form p input:focus {
+    box-shadow: none;
+    border-color: #6c63ff;
+    background-color: #1e1e1e;
+    color: white;
+  }
+  .btn-custom {
+    background-color: #6c63ff;
+    color: white;
+    border-radius: 30px;
+    font-weight: 600;
+    padding: 10px;
+    margin-top: 15px;
+    transition: background-color 0.3s ease;
+    border: none;
+    width: 100%;
+  }
+  .btn-custom:hover {
+    background-color: #5952d4;
+    color: white;
+  }
+  .errorlist {
+    color: #ff6b6b;
+    list-style: none;
+    padding: 0;
+    margin-bottom: 15px;
+    text-align: left;
+    font-size: 0.9rem;
+  }
+  .errorlist li {
+      margin-bottom: 5px;
+  }
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">{% translate 'Create my account' %}</button>
-</form>
+  .signup-box form .errorlist:first-child {
+      margin-top: -15px;
+  }
+
+  .signup-box form p .errorlist {
+      margin-top: 5px;
+      margin-bottom: 0;
+  }
+</style>
 {% endblock %}
+
+{% block content %}
+  <div class="signup-box">
+    <img src="{% static 'dashboard/img/Hyperion.png' %}" alt="Hyperion Logo" />
+    <h2>SIGN UP</h2>
+
+    {% if form.non_field_errors %}
+        <ul class="errorlist">
+            {% for error in form.non_field_errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-custom btn-block">{% translate 'Create my account' %}</button>
+    </form>
+  </div>
+{% endblock %}
+
+{% block extra_js %}{% endblock %}

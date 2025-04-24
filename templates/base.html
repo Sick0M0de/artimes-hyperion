@@ -13,7 +13,8 @@
     <link rel="stylesheet" href="{% static 'css/main_app.css' %}">
     {% block extra_css %}{% endblock %} {# For page-specific CSS like your pomodoro style.css #}
 </head>
-<body>
+{# CORRECTED LINE: Added class="dark-theme" to the body tag #}
+<body id="page-top" class="dark-theme">
 
     {# Optional: Site Header/Navigation #}
     <header>

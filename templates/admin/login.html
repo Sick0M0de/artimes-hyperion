@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +14,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      font-family: sans-serif;
     }
     .login-box {
       width: 100%;
@@ -27,23 +29,38 @@
       width: 100px;
       height: 100px;
       margin-bottom: 20px;
-      background-color: #aaa;
       display: inline-block;
       border-radius: 10px;
+      object-fit: cover;
     }
     .login-box h2 {
       font-weight: 700;
       margin-bottom: 30px;
+      color: white;
+    }
+    .form-group label {
+        text-align: left;
+        display: block;
+        color: #ccc;
+        margin-bottom: .25rem;
+        font-size: 0.9rem;
     }
     .form-control {
       background-color: #1e1e1e;
       color: white;
       border-radius: 10px;
       border: 1px solid #555;
+      padding: 10px 15px;
+    }
+    .form-control::placeholder {
+        color: #aaaaaa;
+        opacity: 1;
     }
     .form-control:focus {
       box-shadow: none;
       border-color: #6c63ff;
+      background-color: #1e1e1e;
+      color: white;
     }
     .btn-custom {
       background-color: #6c63ff;
@@ -53,39 +70,125 @@
       padding: 10px;
       margin-top: 15px;
       transition: background-color 0.3s ease;
+      border: none;
     }
     .btn-custom:hover {
       background-color: #5952d4;
+      color: white;
     }
     .errorlist {
-      color: #ff3333;
+      color: #ff6b6b;
       list-style: none;
       padding: 0;
+      margin-bottom: 15px;
+      text-align: left;
+      font-size: 0.9rem;
     }
+    .errorlist li {
+        margin-bottom: 5px;
+    }
+
+    .signup-section {
+        margin-top: 30px;
+        font-size: 0.95rem;
+    }
+    .signup-section p {
+        margin-bottom: 10px;
+        color: #e0e0e0;
+    }
+    .signup-section .btn-signup {
+        background: none;
+        border: none;
+        padding: 0;
+        color: #6c63ff;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: underline;
+        transition: color 0.3s ease;
+    }
+    .signup-section .btn-signup:hover {
+        color: #5952d4;
+        text-decoration: underline;
+    }
+    .signup-section .btn-signup {
+        display: inline;
+        text-align: center;
+    }
+
+    .logged-in-message {
+        margin-bottom: 20px;
+        font-size: 1.1rem;
+        color: #e0e0e0;
+    }
+    .logged-in-message a {
+        color: #6c63ff;
+        text-decoration: underline;
+        font-weight: 600;
+    }
+    .logged-in-message a:hover {
+        color: #5952d4;
+    }
+
   </style>
 </head>
 <body>
   <div class="login-box">
-    <img src="#" alt="logo" />
+    <img src="{% static 'dashboard/img/Hyperion.png' %}" alt="Hyperion Logo" />
     <h2>LOGIN</h2>
-    <form method="post" action="{% url 'admin:login' %}">
-      {% csrf_token %}
-      {% if messages %}
-        {% for message in messages %}
-          <ul class="errorlist">
-            <li>{{ message }}</li>
-          </ul>
-        {% endfor %}
-      {% endif %}
-      <div class="form-group">
-        <input type="text" class="form-control" name="username" placeholder="Username" required>
-      </div>
-      <div class="form-group">
-        <input type="password" class="form-control" name="password" placeholder="Password" required>
-      </div>
-      <button type="submit" class="btn btn-custom btn-block">Login</button>
-      <input type="hidden" name="next" value="{{ next }}" />
-    </form>
+
+    {% if user.is_authenticated %}
+        <div class="logged-in-message">
+            <p>You are already logged in as {{ user.username }}.</p>
+            <p><a href="{% url 'dashboard' %}">Go to your Dashboard</a></p>
+        </div>
+    {% else %}
+        {% if form.non_field_errors %}
+            <ul class="errorlist">
+                {% for error in form.non_field_errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <form method="post" action="{% url 'login' %}">
+          {% csrf_token %}
+
+          <div class="form-group">
+            <input type="text" class="form-control" name="username" placeholder="Username" required id="id_username">
+             {% if form.username.errors %}
+                 <ul class="errorlist">
+                     {% for error in form.username.errors %}
+                         <li>{{ error }}</li>
+                     {% endfor %}
+                 </ul>
+             {% endif %}
+          </div>
+          <div class="form-group">
+            <input type="password" class="form-control" name="password" placeholder="Password" required id="id_password">
+             {% if form.password.errors %}
+                 <ul class="errorlist">
+                     {% for error in form.password.errors %}
+                         <li>{{ error }}</li>
+                     {% endfor %}
+                 </ul>
+             {% endif %}
+          </div>
+
+          <button type="submit" class="btn btn-custom btn-block">Login</button>
+
+          {% if next %}
+            <input type="hidden" name="next" value="{{ next }}" />
+          {% endif %}
+
+        </form>
+
+        <div class="signup-section">
+            <p>Not Part Of The Club Yet?</p>
+            <a href="{% url 'signup' %}" class="btn-signup">Join Us NOW!!</a>
+        </div>
+    {% endif %}
+
   </div>
+
 </body>
 </html>

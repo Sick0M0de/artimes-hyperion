@@ -1,0 +1,508 @@
+/* Custom styles for Hyperion */
+
+/* --- General Body and Layout Adjustments --- */
+/* Remove default margin and padding from body and html */
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Prevent horizontal scroll issues */
+}
+
+#wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Make sure wrapper takes at least the full viewport height */
+}
+
+#content-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Allow content wrapper to grow and fill space */
+  overflow: hidden; /* Prevent content from overflowing */
+}
+
+#content {
+  flex-grow: 1; /* Allow content area to grow */
+  padding-top: 60px; /* Adjust based on your topbar height to prevent content hiding behind it */
+  padding-bottom: 20px; /* Add some padding at the bottom of the content area */
+}
+
+#wrapper,
+#content-wrapper,
+#content {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+/* --- Dark Theme Styles --- */
+body.dark-theme {
+  background-color: #201D29 !important; /* Very dark background */
+  color: #e0e0e0; /* Light gray text for better readability */
+}
+
+body.dark-theme #wrapper,
+body.dark-theme #content-wrapper {
+  background-color:#201D29 !important; /* Match body background */
+}
+
+body.dark-theme .container-fluid {
+  padding-left: 1.5rem; /* Add horizontal padding */
+  padding-right: 1.5rem; /* Add horizontal padding */
+  padding-bottom: 20px; /* Add space below content in container */
+}
+
+
+body.dark-theme .topbar {
+  background-color: #1C1824  !important; /* Slightly lighter dark for the navbar */
+  color: #ffffff; /* White text in navbar */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* More prominent shadow */
+  padding: 0 1rem; /* Add some horizontal padding to the navbar */
+  min-height: 50px; /* Ensure sufficient height for the navbar */
+  height: 50px;
+}
+
+body.dark-theme .topbar .navbar-brand {
+  color: #ffffff !important; /* White color for app name/logo area */
+  padding-right: 1rem;
+}
+
+body.dark-theme .topbar .navbar-brand img {
+   margin-right: 0.5rem;
+   border-radius: 10px;
+   height: 70px; /* Adjust this value to your desired height */
+   max-height: 70px; /* Ensure it doesn't exceed this height */
+   width: auto;
+}
+
+
+body.dark-theme .topbar .nav-link {
+  color: #cccccc; /* Lighter gray for nav links */
+  margin-right: 1rem; /* Spacing between nav items, adjusted to rem */
+  padding: 0.5rem 0.75rem; /* Add padding for click area */
+  transition: color 0.3s ease; /* Smooth transition for hover */
+}
+
+body.dark-theme .topbar .nav-link:hover,
+body.dark-theme .topbar .nav-link.active {
+  color: #ffffff; /* White on hover or active */
+  /* Consider adding a subtle underline or background on active */
+}
+
+body.dark-theme .topbar .form-control {
+  background-color: #1C1824 ; /* Darker background for search input */
+  color: #e0e0e0; /* Light gray text in search input */
+  border: 1px solid #444444; /* Darker border */
+  border-radius: 0.35rem; /* Match sb-admin-2 default or adjust */
+}
+
+body.dark-theme .topbar .form-control::placeholder {
+  color: #aaaaaa; /* Lighter placeholder text */
+}
+
+body.dark-theme .topbar .input-group-append .btn {
+   background-color: #444444; /* Darker button for search */
+   border-color: #444444; /* Darker border */
+   color: #ffffff; /* White icon color */
+}
+
+body.dark-theme .topbar .input-group-append .btn:hover {
+   background-color: #555555;
+   border-color: #555555;
+}
+
+/* Add vertical padding to the search navbar item */
+body.dark-theme .topbar .navbar-nav .nav-item .form-inline {
+  padding-top: 1.5rem; /* Add padding above the form */
+  padding-bottom: 1.5rem; /* Add padding below the form */
+}
+
+/* You might also need to adjust padding on the nav-link for smaller screens */
+body.dark-theme .topbar .navbar-nav .nav-item.dropdown.d-sm-none .nav-link {
+  
+  padding-top: 0; /* Remove top padding */
+  padding-bottom: 0; /* Remove bottom padding */
+  display: flex; /* Use flexbox for vertical alignment */
+  align-items: center; /* Vertically align icon */
+   height: 100%;
+}
+
+body.dark-theme .card {
+  background-color: #1C1824  !important; /* Dark background for cards, slightly lighter than body */
+  color: #e0e0e0; /* Light gray text in cards */
+  border-radius: 8px; /* Slightly less rounded corners, adjust to taste */
+  border: 1px solid #333333; /* Subtle border */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Refined shadow */
+}
+
+body.dark-theme .card-body h4 {
+  color: #ffffff; /* White color for card titles */
+  margin-bottom: 1rem; /* Add space below card titles */
+}
+
+body.dark-theme .list-group-item {
+  background-color: transparent !important; /* Transparent background for list items */
+  color: #e0e0e0; /* Light gray text for list items */
+  border-color: #333333 !important; /* Darker border for list items */
+  padding: 0.75rem 0; /* Adjust padding */
+}
+
+body.dark-theme .list-group-item:last-child {
+   border-bottom: none !important; /* Remove bottom border for the last item */
+}
+
+
+body.dark-theme .form-control {
+  background-color: #2c2c2c; /* Darker background for form inputs */
+  color: #e0e0e0; /* Light gray text in form inputs */
+  border: 1px solid #444444; /* Darker border */
+}
+
+body.dark-theme .form-control::placeholder {
+  color: #aaaaaa; /* Lighter placeholder text */
+}
+
+body.dark-theme .btn-primary {
+  background-color: #007bff; /* Keep primary button color or adjust */
+  border-color: #007bff; /* Keep primary button color or adjust */
+}
+
+body.dark-theme .btn-primary:hover {
+   background-color: #0056b3;
+   border-color: #004085;
+}
+
+body.dark-theme .modal-content {
+  background-color: #1e1e1e; /* Dark background for modals */
+  color: #e0e0e0; /* Light gray text in modals */
+  border: 1px solid #333333; /* Subtle border */
+}
+
+body.dark-theme .modal-header {
+  border-color: #333333; /* Darker border for modal header */
+  padding-bottom: 1rem;
+}
+
+body.dark-theme .modal-title {
+  color: #ffffff; /* White color for modal title */
+}
+
+body.dark-theme .modal-footer {
+   border-color: #333333; /* Darker border for modal footer */
+   padding-top: 1rem;
+}
+
+body.dark-theme .sticky-footer {
+  background-color: #1C1824 ; /* Dark background for footer, match navbar */
+  color: #e0e0e0; /* Light gray text in footer */
+  padding: 1.5rem 0; /* Adjust padding */
+}
+
+body.dark-theme .copyright span {
+  color: #e0e0e0; /* Light gray color for copyright text */
+}
+
+/* Adjustments for content sections */
+.container-fluid {
+  padding-left: 1rem; /* Add horizontal padding */
+  padding-right: 1rem; /* Add horizontal padding */
+  padding-bottom: 15px;
+}
+
+
+.feature-section {
+  margin-top: 15px; /* Add space above each feature section */
+  padding-bottom: 15px; /* Add space below each feature section */
+}
+
+.feature-section h2 {
+  color: #ffffff; /* White color for section titles */
+  margin-bottom: 0.75rem; /* Add space below section titles */
+}
+
+/* Adjust spacing within the feature sections */
+.feature-section .card {
+  margin-bottom: 1rem; /* Space between cards or card and elements */
+}
+
+.feature-section .list-group {
+  margin-bottom: 0.75rem; /* Space below list group */
+}
+
+.feature-section .input-group,
+.feature-section .form-control,
+.feature-section .btn {
+  margin-top: 0.75rem; /* Space above form elements */
+}
+
+.feature-section .input-group:first-child,
+.feature-section .form-control:first-child,
+.feature-section .btn:first-child {
+   margin-top: 0; /* No top margin if it's the first element in its container */
+}
+
+/* Adjust spacing for the chat button */
+.btn[data-target="#chatModal"] {
+  bottom: 20px;
+  right: 20px;
+}
+
+/* Scroll to top button styling for dark theme */
+body.dark-theme .scroll-to-top {
+  background: rgba(0, 0, 0, 0.5);
+  color: rgba(255, 255, 255, 0.5);
+}
+
+body.dark-theme .scroll-to-top:hover {
+  background: rgba(0, 0, 0, 0.7);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Further adjustments to remove space above navbar */
+#content-wrapper {
+  padding-top: 0 !important; /* Ensure no padding at the top of content wrapper */
+  margin-top: 0 !important;  /* Ensure no margin at the top of content wrapper */
+}
+
+#content {
+  padding-top: 60px; /* Keep this to make space *for* the navbar, adjust if your navbar height is different */
+  margin-top: 0 !important; /* Ensure no margin at the top of content */
+}
+
+.topbar {
+  margin-top: 0 !important; /* Ensure no margin at the top of the topbar itself */
+}
+
+body {
+  padding-top: 0 !important; /* Ensure no padding at the top of the body */
+}
+
+html {
+   margin-top: 0 !important; /* Ensure no margin at the top of html */
+   padding-top: 0 !important; /* Ensure no padding at the top of html */
+}
+
+/* Ensure chart canvas has a max height and displays correctly */
+.card .card-body canvas {
+  display: block !important; /* Essential for controlling canvas dimensions */
+  width: 100% !important; /* Canvas should take full width of its container */
+  max-height: 300px !important; /* Set the maximum height (adjust as needed) */
+  height: auto !important; /* Allow height to be determined automatically but respect max-height */
+}
+
+/* Optional: Add a minimum height to the card body if needed for consistency */
+.card-body {
+   min-height: 200px; /* Adjust this value - ensures card body has some height even with short content */
+}
+
+/* Add smooth fade-in transition to content sections */
+.feature-section,
+#default-content {
+    opacity: 0; /* Start invisible */
+    transition: opacity 0.5s ease-in-out; /* Smooth transition over 0.5 seconds */
+    /* We will control visibility/display with JavaScript */
+}
+
+.feature-section.show,
+#default-content.show {
+    opacity: 1; /* Fade in when the 'show' class is added */
+}
+
+/* Animated underline on navbar links */
+body.dark-theme .topbar .navbar-nav .nav-item .nav-link {
+  position: relative; /* Needed for positioning the pseudo-element */
+  overflow: hidden; /* Hide the pseudo-element until it slides in */
+   /* Add some space for the underline */
+  padding-top: 0; /* Remove top padding */
+  padding-bottom: 0; /* Remove bottom padding */
+  margin-bottom: 0; /* Remove bottom margin */
+     display: flex; /* Use flexbox to align search input and button */
+     align-items: center; /* Vertically align items in search form */
+     height: 100%; /* Make form take full height for alignment */
+}
+
+body.dark-theme .topbar .navbar-nav .nav-item .nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 2px; /* Position the underline */
+  left: 0;
+  width: 100%;
+  height: 1.5px; /* Thickness of the underline */
+  background-color: #007bff; /* Underline color (using Bootstrap primary color) */
+  transform: translateX(-100%); /* Start off-screen to the left */
+  transition: transform 0.3s ease-out; /* Smooth sliding transition */
+ 
+  
+}
+
+body.dark-theme .topbar .navbar-nav .nav-item .nav-link:hover::after,
+body.dark-theme .topbar .navbar-nav .nav-item .nav-link.active::after {
+  transform: translateX(0); /* Slide in when hovered or active */
+}
+
+/* Adjust padding of the search nav item if the underline overlaps */
+body.dark-theme .topbar .navbar-nav .nav-item .form-inline {
+   
+   
+   padding-top: 0; /* Remove top padding */
+   padding-bottom: 0; /* Remove bottom padding */
+   margin-bottom: 0; /* Remove bottom margin */
+   display: flex; /* Use flexbox to align search input and button */
+   align-items: center; /* Vertically align items in search form */
+   height: 100%;
+}
+
+/* Subtle hover effect for cards */
+body.dark-theme .card {
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Smooth transition */
+}
+
+body.dark-theme .card-body {
+  padding: 1rem !important; /* Reduced padding inside card body */
+}
+
+body.dark-theme .card:hover {
+  transform: translateY(-5px); /* Lift the card slightly */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.6); /* Increase shadow on hover */
+}
+
+/* Apply Outfit font globally and for dark theme */
+body {
+  font-family: 'Outfit', sans-serif; /* Apply Outfit as the default font */
+  font-size: 0.9rem;
+}
+
+body.dark-theme {
+  background-color: #201D29; /* Your desired deep dark background */
+  color: #e0e0e0; /* Light gray text for better readability */
+  font-family: 'Outfit', sans-serif; /* Ensure Outfit is used in dark theme */
+  font-size: 0.9rem;
+}
+
+/* Apply Outfit to headings and set weight */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Outfit', sans-serif; /* Ensure headings use Outfit */
+  font-weight: 700; /* Example: Use bold weight for headings */
+  color: #ffffff; /* White color for headings in dark theme */
+}
+
+h1 { font-size: 2rem; } /* Example adjustment */
+h2 { font-size: 1.75rem; } /* Example adjustment */
+h3 { font-size: 1.5rem; } /* Example adjustment */
+h4 { font-size: 1.25rem; } /* Example adjustment */
+h5 { font-size: 1rem; } /* Example adjustment */
+h6 { font-size: 0.85rem; }
+
+
+p, span, div, label, input, textarea, button {
+  font-family: 'Outfit', sans-serif; /* Apply Outfit to common elements */
+}
+
+.mb-4 { margin-bottom: 1rem !important; } /* Reduce mb-4 from 1.5rem to 1rem */
+.mt-2 { margin-top: 0.5rem !important; }
+
+/* --- Custom Chat Window Styles --- */
+.chat-window {
+  position: fixed;
+  bottom: 80px; /* Position above the chat button */
+  right: 20px;
+  width: 300px; /* Set a width */
+  height: 400px; /* Set a height */
+  background-color: #1e1e1e; /* Dark background, match cards/navbar */
+  border: 1px solid #333333; /* Subtle border */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); /* Shadow */
+  z-index: 1050; /* Ensure it's above most other content */
+  display: none; /* Initially hidden */
+  flex-direction: column; /* Arrange header, body, footer vertically */
+  overflow: hidden; /* Hide any overflowing content */
+
+  /* Add subtle animation for opening */
+  opacity: 0;
+  transform: translateY(20px); /* Start slightly below its final position */
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.chat-window.open {
+  display: flex; /* Show the window as a flex container */
+  opacity: 1; /* Fade in */
+  transform: translateY(0); /* Slide up to final position */
+}
+
+.chat-header {
+  padding: 10px 15px;
+  background-color: #2c2c2c; /* Slightly darker header */
+  border-bottom: 1px solid #333333; /* Separator */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chat-title {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #ffffff; /* White title text */
+}
+
+.close-chat {
+  background: none;
+  border: none;
+  color: #cccccc; /* Light gray close button */
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.close-chat:hover {
+  color: #ffffff; /* White on hover */
+}
+
+.chat-body {
+  flex-grow: 1; /* Allow body to take up available space */
+  padding: 15px;
+  overflow-y: auto; /* Make message area scrollable */
+  color: #e0e0e0; /* Light gray text for messages */
+  font-size: 0.9rem;
+  display: flex;
+  flex-direction: column; /* Stack messages vertically */
+}
+
+/* Basic styling for messages (you'll need more detailed styling based on sender) */
+.chat-body div {
+  margin-bottom: 10px;
+  padding: 8px 12px;
+  border-radius: 5px;
+  max-width: 85%; /* Limit message width */
+}
+
+.chat-body div.user-message {
+  align-self: flex-end; /* Align user messages to the right */
+  background-color: #007bff; /* Primary color for user messages */
+  color: white;
+}
+
+.chat-body div.bot-message {
+  align-self: flex-start; /* Align bot messages to the left */
+  background-color: #3a3a3a; /* Darker background for bot messages */
+  color: #e0e0e0;
+}
+
+
+.chat-footer {
+  padding: 10px 15px;
+  border-top: 1px solid #333333; /* Separator */
+  display: flex;
+  align-items: center;
+}
+
+.chat-footer .form-control {
+  flex-grow: 1; /* Allow input to take available space */
+  margin-right: 10px;
+  background-color: #2c2c2c; /* Darker background for input */
+  color: #e0e0e0;
+  border-color: #444444;
+}
+
+
+
+
+body {
+  padding-bottom: 2px; /* Adjust based on chat window height + button height + spacing */
+}
