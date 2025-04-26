@@ -1,101 +1,103 @@
 {# pomodoro_app/templates/pomodoro/pomodoro_sidebar.html #}
 {% load static %}
 
-<div id="pomodoroSidebar" class="sidebar vh-100 position-fixed end-0 top-0 bg-dark text-light overflow-auto">
-    <button id="closeSidebarBtn" class="btn-close btn-close-white position-absolute top-0 end-0 mt-3 me-3" aria-label="Close"></button>
+{# REMOVED: Outer #pomodoroSidebar div and its attributes/inline styles #}
+{# REMOVED: The close button, as it is defined in dashboard.html #}
 
-    <div id="timerWidgetContainer" class="mb-4">
-        <div id="timerWidget" class="timer-widget d-flex flex-column align-items-center justify-content-center">
-            <h5 id="displayTime" class="mb-3">25:00</h5>
-            <div class="timer-controls d-flex justify-content-center align-items-center">
-                <button id="startPauseBtn" class="btn btn-primary me-3">Let's Rock!</button>
-                <button id="resetTimerBtn" class="btn btn-secondary me-3">
-                    <i class="bi bi-arrow-clockwise"></i> Reset
-                </button>
-            </div>
+{# This is the content that will be included INSIDE the #pomodoroSidebar div from dashboard.html #}
+
+<div id="timerWidgetContainer" class="mb-4">
+    <div id="timerWidget" class="timer-widget d-flex flex-column align-items-center justify-content-center">
+        <h5 id="displayTime" class="mb-3">25:00</h5>
+        <div class="timer-controls d-flex justify-content-center align-items-center">
+            <button id="startPauseBtn" class="btn btn-primary me-3">Let's Rock!</button>
+            <button id="resetTimerBtn" class="btn btn-secondary me-3">
+                <i class="bi bi-arrow-clockwise"></i> Reset
+            </button>
         </div>
     </div>
+</div>
 
-    <div class="sidebar-content">
-        <h6 class="mt-4 mb-2 fw-bold">Music Mode</h6>
-        <div id="musicModeSection" class="music-mode-section mb-4 p-3 rounded bg-secondary bg-opacity-10">
-            <p class="small text-light">Crank up the volume!</p>
+<div class="sidebar-content"> {# This div wraps the rest of the content #}
+    <h6 class="mt-4 mb-2 fw-bold">Music Mode</h6>
+    <div id="musicModeSection" class="music-mode-section mb-4 p-3 rounded bg-secondary bg-opacity-10">
+        <p class="small text-light">Crank up the volume!</p>
 
-            {# Existing Input, Load Button, YouTube Player, and initial Controls #}
-            <div class="mb-3"> {# This div wraps the input/label #}
-                <label for="youtubeLinkInput" class="form-label small fw-bold text-light">YouTube Link</label>
-                <input type="text" class="form-control form-control-sm bg-dark text-light border-secondary"
-                       id="youtubeLinkInput" placeholder="Paste YouTube link...">
-            </div>
-            {# This div wraps the load button, youtube player, and initial controls #}
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <button class="btn btn-sm btn-primary" id="loadMusicBtn">Load that track!</button>
-                <div id="youtube-player" style="display: none;"></div>
-                <div class="music-controls" style="display: none;">
-                    <button class="btn btn-sm btn-secondary me-1" id="playPauseMusicBtn"><i class="bi bi-play-fill"></i></button>
-                </div>
-            </div>
-            <p class="small text-light mt-2" id="currentTrackInfo" style="display: none;">
-                Now playing: <span id="trackTitle"></span>
-            </p>
-
-            {# --- ADD New structure for the displayed music player area AFTER the existing elements --- #}
-            {# This div will be shown by JavaScript when a track is loaded, hiding the input/load button #}
-            <div id="musicPlayerDisplay" class="d-flex align-items-center" style="display: none;">
-                {# Album Art Placeholder (Use a default image from your static files) #}
-                <img id="albumArt" src="{% static 'pomodoro/default_album_art.png' %}" alt="Album Art" class="me-3 rounded-start" style="width: 60px; height: 60px; object-fit: cover;">
-
-                {# Track Info and Controls Container #}
-                <div class="flex-grow-1 d-flex flex-column">
-                    {# Track Title and Artist #}
-                    <div class="mb-1 text-truncate">
-                        <div id="trackTitle" class="fw-bold text-light text-truncate">Track Title</div>
-                        <div id="trackArtist" class="small text-muted text-truncate">Artist Name</div> {# New ID for artist #}
-                    </div>
-
-                    {# Playback Controls #}
-                    <div class="music-controls d-flex align-items-center">
-                        {# Example Skip Back button #}
-                        <button class="btn btn-sm btn-link text-decoration-none text-light p-0 me-2"><i class="bi bi-skip-start-fill fs-5"></i></button>
-                        {# Play/Pause Button #}
-                        <button class="btn btn-sm btn-link text-decoration-none text-light p-0 mx-2" id="playPauseMusicBtn"><i class="bi bi-play-fill fs-4"></i></button>
-                        {# Example Skip Forward button #}
-                        <button class="btn btn-sm btn-link text-decoration-none text-light p-0 ms-2"><i class="bi bi-skip-end-fill fs-5"></i></button>
-
-                        {# Example Add/Options button (like the + and ...) #}
-                        <button class="btn btn-sm btn-link text-decoration-none text-light p-0 ms-3"><i class="bi bi-plus-circle fs-5"></i></button>
-                        <button class="btn btn-sm btn-link text-decoration-none text-light p-0 ms-1"><i class="bi bi-three-dots fs-5"></i></button>
-
-                        {# Placeholder for Spotify Icon (if desired) #}
-                        {# This would require an SVG or image #}
-                        {# <i class="bi bi-spotify fs-5 ms-auto"></i> #}
-                    </div>
-                </div>
-            </div>
-            {# --- End new structure --- #}
-
+        {# Existing Input, Load Button, YouTube Player, and initial Controls #}
+        <div class="mb-3"> {# This div wraps the input/label #}
+            <label for="youtubeLinkInput" class="form-label small fw-bold text-light">YouTube Link</label>
+            <input type="text" class="form-control form-control-sm bg-dark text-light border-secondary"
+                   id="youtubeLinkInput" placeholder="Paste YouTube link...">
         </div>
-
-        <h6 class="mt-4 mb-2 fw-bold">Configurations</h6>
-        <p class="text-light small fst-italic mb-3">"Gotta be stylish even in setup."</p>
-
-        <div id="defaultConfigs" class="list-group mb-3">
-            <div class="list-group-item list-group-item-dark d-flex justify-content-between align-items-center">
-                <div>
-                    <h6 class="mb-1">smoll talk</h6>
-                    <p class="mb-0 text-muted small">(this is too easy)</p>
-                    <small>25 min work / 5 min break</small>
-                </div>
-                <button class="btn btn-outline-secondary btn-sm edit-config-btn" data-config-id="default-25">Edit</button>
+        {# This div wraps the load button, youtube player, and initial controls #}
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <button class="btn btn-sm btn-primary" id="loadMusicBtn">Load that track!</button>
+            <div id="youtube-player" style="display: none;"></div>
+            <div class="music-controls" style="display: none;">
+                <button class="btn btn-sm btn-secondary me-1" id="playPauseMusicBtn"><i class="bi bi-play-fill"></i></button>
             </div>
-            <div class="list-group-item list-group-item-dark d-flex justify-content-between align-items-center">
-                <div>
-                    <h6 class="mb-1">time to get my hands dirty by work</h6>
-                    <small>50 min work / 10 min break</small>
+        </div>
+        <p class="small text-light mt-2" id="currentTrackInfo" style="display: none;">
+            Now playing: <span id="trackTitle"></span>
+        </p>
+
+        {# --- ADD New structure for the displayed music player area AFTER the existing elements --- #}
+        {# This div will be shown by JavaScript when a track is loaded, hiding the input/load button #}
+        <div id="musicPlayerDisplay" class="d-flex align-items-center" style="display: none;">
+            {# Album Art Placeholder (Use a default image from your static files) #}
+            <img id="albumArt" src="{% static 'pomodoro/default_album_art.png' %}" alt="Album Art" class="me-3 rounded-start" style="width: 60px; height: 60px; object-fit: cover;">
+
+            {# Track Info and Controls Container #}
+            <div class="flex-grow-1 d-flex flex-column">
+                {# Track Title and Artist #}
+                <div class="mb-1 text-truncate">
+                    <div id="trackTitle" class="fw-bold text-light text-truncate">Track Title</div>
+                    <div id="trackArtist" class="small text-muted text-truncate">Artist Name</div> {# New ID for artist #}
                 </div>
-                <button class="btn btn-outline-secondary btn-sm edit-config-btn" data-config-id="default-50">Edit</button>
+
+                {# Playback Controls #}
+                <div class="music-controls d-flex align-items-center">
+                    {# Example Skip Back button #}
+                    <button class="btn btn-sm btn-link text-decoration-none text-light p-0 me-2"><i class="bi bi-skip-start-fill fs-5"></i></button>
+                    {# Play/Pause Button #}
+                    <button class="btn btn-sm btn-link text-decoration-none text-light p-0 mx-2" id="playPauseMusicBtn"><i class="bi bi-play-fill fs-4"></i></button>
+                    {# Example Skip Forward button #}
+                    <button class="btn btn-sm btn-link text-decoration-none text-light p-0 ms-2"><i class="bi bi-skip-end-fill fs-5"></i></button>
+
+                    {# Example Add/Options button (like the + and ...) #}
+                    <button class="btn btn-sm btn-link text-decoration-none text-light p-0 ms-3"><i class="bi bi-plus-circle fs-5"></i></button>
+                    <button class="btn btn-sm btn-link text-decoration-none text-light p-0 ms-1"><i class="bi bi-three-dots fs-5"></i></button>
+
+                    {# Placeholder for Spotify Icon (if desired) #}
+                    {# This would require an SVG or image #}
+                    {# <i class="bi bi-spotify fs-5 ms-auto"></i> #}
+                </div>
             </div>
-            <div class="list-group-item list-group-item-dark d-flex justify-content-between align-items-center">
+        </div>
+        {# --- End new structure --- #}
+
+    </div>
+
+    <h6 class="mt-4 mb-2 fw-bold">Configurations</h6>
+    <p class="text-light small fst-italic mb-3">"Gotta be stylish even in setup."</p>
+
+    <div id="defaultConfigs" class="list-group mb-3">
+        <div class="list-group-item list-group-item-dark d-flex justify-content-between align-items-center">
+            <div>
+                <h6 class="mb-1">smoll talk</h6>
+                <p class="mb-0 text-muted small">(this is too easy)</p>
+                <small>25 min work / 5 min break</small>
+            </div>
+            <button class="btn btn-outline-secondary btn-sm edit-config-btn" data-config-id="default-25">Edit</button>
+        </div>
+        <div class="list-group-item list-group-item-dark d-flex justify-content-between align-items-center">
+            <div>
+                <h6 class="mb-1">time to get my hands dirty by work</h6>
+                <small>50 min work / 10 min break</small>
+            </div>
+            <button class="btn btn-outline-secondary btn-sm edit-config-btn" data-config-id="default-50">Edit</button>
+        </div>
+        <div class="list-group-item list-group-item-dark d-flex justify-content-between align-items-center">
                 <div>
                     <h6 class="mb-1">this one's gonna be dozy</h6>
                     <small>2 hours work / 30 min break</small>
@@ -167,4 +169,3 @@
             </label>
         </div>
     </div>
-</div>

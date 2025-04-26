@@ -26,7 +26,6 @@ from django.contrib.auth import views as auth_views
 # Import dashboard views (assuming it's in a separate app)
 from dashboard import views as dashboard_views
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
 
@@ -45,9 +44,6 @@ urlpatterns = [
     path('accounts/logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
 
     # --- End Authentication URLs ---
-
-    # Pomodoro App URLs
-    path('pomodoro_app/', include('pomodoro_app.urls')),
 
     # Dashboard URL (points to the dashboard app's view)
     path('dashboard/', dashboard_views.dashboard_view, name='dashboard'),

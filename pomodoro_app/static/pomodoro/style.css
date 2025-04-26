@@ -2,7 +2,7 @@
 
 /* Sidebar base styles matching the aesthetic */
 .sidebar {
-    width: 320px;
+    width: 450px; /* Increased width for more space */
     z-index: 1050;
     height: 100vh;
     display: flex;
@@ -13,17 +13,21 @@
     transition: transform 0.3s ease-in-out;
     color: #DCDDDE; /* Light text */
     border-left: 1px solid rgba(255, 255, 255, 0.08);
-    transform: translateX(100%);
-    padding: 0 !important;
+    transform: translateX(100%); /* Default hidden state */
+    padding: 0 !important; /* Keeping original padding */
+    position: fixed; /* Ensure it's fixed to the viewport */
+    top: 0; /* Position at the top */
+    right: 0; /* Position on the right */
 }
 
 .sidebar.visible {
-    transform: translateX(0);
+    transform: translateX(0); /* Visible state */
 }
 
 /* Timer widget container */
+/* Adjusted width calculation to account for new sidebar width */
 #timerWidgetContainer {
-    width: calc(100% - 40px);
+    width: calc(100% - 40px); /* 450px - 40px = 410px effectively */
     margin: 20px auto;
     flex-shrink: 0;
 }
@@ -31,7 +35,7 @@
 /* Styling for the timer widget */
 #timerWidget {
     position: relative;
-    width: 100%;
+    width: 100%; /* This is 100% of #timerWidgetContainer */
     min-height: 150px;
     display: flex;
     flex-direction: column;
@@ -89,9 +93,9 @@
 /* Sidebar Content Area */
 .sidebar-content {
     flex-grow: 1;
-    padding: 0 20px;
+    padding: 0 20px; /* Padding remains */
     padding-bottom: 30px;
-    overflow-y: auto;
+    overflow-y: auto; /* Ensure this content area can scroll if needed */
 }
 
 /* Style for the Close Button */
@@ -100,14 +104,19 @@
     position: absolute;
     top: 15px;
     right: 15px;
-    padding: 8px;
-    filter: invert(1); /* Keep white close button */
+    padding: 0.5rem; /* Adjusted padding */
+    background: none; /* Remove default button background */
+    border: none; /* Remove default button border */
+    color: #DCDDDE; /* Light text color for the 'x' */
+    font-size: 1.5em; /* Adjust size */
+    cursor: pointer;
     opacity: 0.6;
     transition: opacity 0.2s ease;
 }
 
 #closeSidebarBtn:hover {
     opacity: 1;
+    color: #ffffff; /* White on hover */
 }
 
 /* Music Mode Section Styling */
@@ -310,20 +319,10 @@
     transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
-.list-group-item-dark .btn-outline-secondary {
-    color: #B9BBBE; /* Discord grey */
-    border-color: rgba(255, 255, 255, 0.1);
-}
-
 .list-group-item-dark .btn-outline-secondary:hover {
     background-color: rgba(255, 255, 255, 0.1);
     color: #ffffff;
     border-color: rgba(255, 255, 255, 0.2);
-}
-
-.list-group-item-dark .btn-outline-danger {
-    color: #F04747; /* Discord Red */
-    border-color: rgba(240, 71, 71, 0.5);
 }
 
 .list-group-item-dark .btn-outline-danger:hover {
@@ -407,4 +406,15 @@
     border-bottom-color: #303030 !important;
     border-left-color: #303030 !important;
     border-right-color: #303030 !important;
+}
+
+/* Added rules to ensure key content containers are visible */
+.sidebar-content,
+#timerWidgetContainer,
+#timerWidget,
+#musicModeSection,
+#musicPlayerDisplay,
+#pomodoroSidebar .text-muted.small { /* Added specific rule for nested text-muted small */
+    display: block !important;
+    visibility: visible !important;
 }

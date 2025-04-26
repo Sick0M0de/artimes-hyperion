@@ -1,45 +1,40 @@
 {# hyperion/templates/dashboard/dashboard.html #}
-{% extends 'base.html' %} {# Extend your project's base template - MUST BE FIRST #}
-{% load static %} {# Load Django's static file tags - MUST COME AFTER {% extends %} #}
 
-{% block title %}Hyperion - Dashboard{% endblock %} {# Set the page title #}
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Hyperion - Dashboard{% endblock %}
 
 {% block extra_css %}
-    {# Link to dashboard-specific CSS and vendor styles using {% static %} #}
     <link href="{% static 'dashboard/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
-    {# Google Fonts (external links are fine) #}
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Special+Gothic+Expanded+One&display=swap" rel="stylesheet">
-
-    {# Dashboard specific CSS files #}
     <link href="{% static 'dashboard/dash-css/sb-admin-2.min.css' %}" rel="stylesheet">
     <link href="{% static 'dashboard/dash-css/dash-style.css' %}" rel="stylesheet">
+    {# Load Pomodoro CSS last to increase specificity #}
+    <link rel="stylesheet" href="{% static 'pomodoro/style.css' %}">
 {% endblock %}
 
 {% block content %}
-    {# The main content of your dashboard goes here, wrapped in the content block #}
-    {# This includes the wrapper, content-wrapper, topbar, page content areas, etc. #}
-
     <div id="wrapper">
+        {# Sidebar for Pomodoro App #}
+        {# This is the main sidebar container #}
+        <div id="pomodoroSidebar" class="bg-dark sidebar">
+            {% include 'pomodoro/pomodoro_sidebar.html' %}
+            {# Added the close button for the sidebar #}
+            <button id="closeSidebarBtn" type="button" class="btn-close btn-close-white" aria-label="Close"></button>
+        </div>
 
-        {# You can add a sidebar here if your design includes one outside the topbar #}
-        {# Based on your HTML, the navigation seems to be in the topbar. #}
-
-        <div id="content-wrapper" class="d-flex flex-column">
-
+        <div id="content-wrapper" class="d-flex flex-column" style="margin-right: 0;">
             <div id="content">
-
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-                    <a class="navbar-brand" href="#"> {# You might link this to the dashboard home or '/' later #}
-                        {# Use {% static %} for your logo image #}
+                    <a class="navbar-brand" href="#">
                         <img src="{% static 'dashboard/img/arte.webp' %}" alt="Hyperion Logo" style="max-height: 40px;" class="mr-2">
-                         <span class="d-none d-sm-inline text-gray-900">Hyperion</span> {# Added Project Name #}
+                        <span class="d-none d-sm-inline text-gray-900">Hyperion</span>
                     </a>
-
-                    {# Navigation links in the topbar. Update hrefs with {% url %} later #}
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
                             <a class="nav-link" href="#" data-target="default-content">
@@ -47,30 +42,27 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" data-target="todo"> {# Update href with {% url 'tasks:list' %} later #}
+                            <a class="nav-link" href="#" data-target="todo">
                                 <span>To-Do List</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" data-target="mood"> {# Update href with {% url 'mood_journal:list' %} later #}
+                            <a class="nav-link" href="#" data-target="mood">
                                 <span>Mood Journal</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" data-target="habits"> {# Update href with {% url 'habits:list' %} later #}
+                            <a class="nav-link" href="#" data-target="habits">
                                 <span>Habit Tracker</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" data-target="notes"> {# Update href with {% url 'notes:list' %} later #}
+                            <a class="nav-link" href="#" data-target="notes">
                                 <span>Notes Maker</span>
                             </a>
                         </li>
                     </ul>
-
                     <ul class="navbar-nav ml-auto">
-
-                        {# Search dropdown for mobile #}
                         <li class="nav-item dropdown no-arrow d-sm-none">
                             <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -92,13 +84,11 @@
                                 </form>
                             </div>
                         </li>
-
-                         {# Search form for desktop #}
                         <li class="nav-item d-none d-sm-inline-block">
                             <form class="form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                                 <div class="input-group">
                                     <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                            aria-label="Search" aria-describedby="basic-addon2">
+                                        aria-label="Search" aria-describedby="basic-addon2">
                                     <div class="input-group-append">
                                         <button class="btn btn-primary" type="button">
                                             <i class="fas fa-search fa-sm"></i>
@@ -107,13 +97,9 @@
                                 </div>
                             </form>
                         </li>
-
-
-                        {# User Profile Dropdown #}
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                 {# Display the logged-in username #}
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
                                     {% if user.is_authenticated %}
                                         {{ user.username }}
@@ -121,71 +107,58 @@
                                         Guest
                                     {% endif %}
                                 </span>
-                                 {# Use {% static %} for the profile image #}
                                 <img class="img-profile rounded-circle" src="{% static 'dashboard/img/undraw_profile.svg' %}">
                             </a>
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                {# Profile Link - update href later to a Django URL #}
-                                <a class="dropdown-item" href="#"> {# Update href with {% url 'profile' %} or similar later #}
+                                <a class="dropdown-item" href="#">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
-                                 {# Settings Link - update href later #}
-                                <a class="dropdown-item" href="#"> {# Update href with {% url 'settings' %} or similar later #}
+                                <a class="dropdown-item" href="#">
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Settings
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                {# Logout Link - **Now triggers the POST form submission** #}
                                 <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
                             </div>
                         </li>
-
+                        <li class="nav-item">
+                            <button class="btn btn-primary" id="openPomodoroSidebarBtn" style="margin-left: 10px;">Pomodoro</button>
+                        </li>
+                         <li class="nav-item">
+                            <button class="btn btn-primary" id="chat-toggle-btn" style="margin-left: 10px;">Chat</button>
+                        </li>
                     </ul>
-
                 </nav>
-                {# End of Topbar #}
-
-                {# Main Page Content Area #}
                 <div class="container-fluid">
-                    {# Content for different sections will go here, managed by JS initially #}
-
-                    {# Dashboard Overview Section (Graphs) #}
                     <div id="default-content" class="content-wrapper" style="display: block; padding: 20px;">
                         <h2 class="text-white">Dashboard Overview</h2>
                         <div class="row">
-                            {# Habit Tracker Chart Card #}
                             <div class="col-xl-6 mb-4">
                                 <div class="card" style="background: #333; border-radius: 15px;">
                                     <div class="card-body">
                                         <h4 class="text-white">Habit Tracker</h4>
-                                         {# Canvas for the Habit Chart - JS will draw on this #}
                                         <canvas id="habitChart"></canvas>
                                     </div>
                                 </div>
                             </div>
-                            {# Mood Distribution Chart Card #}
                             <div class="col-xl-6 mb-4">
                                 <div class="card" style="background: #333; border-radius: 15px;">
                                     <div class="card-body">
                                         <h4 class="text-white">Mood Distribution</h4>
-                                         {# Canvas for the Mood Chart - JS will draw on this #}
                                         <canvas id="moodChart"></canvas>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    {# To-Do List Section #}
                     <div id="todo" class="feature-section" style="display: none;">
                         <h2 class="text-white">To-Do List</h2>
-                         {# Placeholder/basic HTML for To-Do List - will be dynamic later #}
-                         <div class="card" style="background: #333; border-radius: 15px; padding: 15px;">
+                        <div class="card" style="background: #333; border-radius: 15px; padding: 15px;">
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item" style="background: transparent; color: white; border-color: #444;"><input type="checkbox"> Task 1</li>
                                 <li class="list-group-item" style="background: transparent; color: white; border-color: #444;"><input type="checkbox"> Task 2</li>
@@ -196,73 +169,50 @@
                                     <button class="btn btn-primary" type="button">Add</button>
                                 </div>
                             </div>
-                         </div>
+                        </div>
                     </div>
-
-                    {# Mood Journal Section #}
                     <div id="mood" class="feature-section" style="display: none;">
                         <h2 class="text-white">Mood Journal</h2>
-                         {# Placeholder/basic HTML for Mood Journal - will be dynamic later #}
-                         <div class="card" style="background: #333; border-radius: 15px; padding: 15px;">
-                             <textarea class="form-control" placeholder="How are you feeling?" rows="6" style="background: #444; color: white; border-color: #555;"></textarea>
-                             <button class="btn btn-primary mt-3">Save</button>
-                         </div>
+                        <div class="card" style="background: #333; border-radius: 15px; padding: 15px;">
+                            <textarea class="form-control" placeholder="How are you feeling?" rows="6" style="background: #444; color: white; border-color: #555;"></textarea>
+                            <button class="btn btn-primary mt-3">Save</button>
+                        </div>
                     </div>
-
-                    {# Habit Tracker Section #}
                     <div id="habits" class="feature-section" style="display: none;">
                         <h2 class="text-white">Habit Tracker</h2>
-                         {# Placeholder/basic HTML for Habit Tracker - will be dynamic later #}
-                         <div class="card" style="background: #333; border-radius: 15px; padding: 15px;">
-                             <ul class="list-group list-group-flush">
-                                 <li class="list-group-item d-flex justify-content-between align-items-center" style="background: transparent; color: white; border-color: #444;">
-                                     Drink Water: <span>0/5</span>
-                                     <button class="btn btn-sm btn-primary">Add</button>
-                                 </li>
-                                 <li class="list-group-item d-flex justify-content-between align-items-center" style="background: transparent; color: white; border-color: #444;">
-                                     Exercise: <span>0 times</span>
-                                     <button class="btn btn-sm btn-primary">Add</button>
-                                 </li>
-                             </ul>
-                         </div>
+                        <div class="card" style="background: #333; border-radius: 15px; padding: 15px;">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex justify-content-between align-items-center" style="background: transparent; color: white; border-color: #444;">
+                                    Drink Water: <span>0/5</span>
+                                    <button class="btn btn-sm btn-primary">Add</button>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center" style="background: transparent; color: white; border-color: #444;">
+                                    Exercise: <span>0 times</span>
+                                    <button class="btn btn-sm btn-primary">Add</button>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-
-                    {# Notes Maker Section #}
                     <div id="notes" class="feature-section" style="display: none;">
                         <h2 class="text-white">Notes Maker</h2>
-                         {# Placeholder/basic HTML for Notes Maker - will be dynamic later #}
-                         <div class="card" style="background: #333; border-radius: 15px; padding: 15px;">
-                             <textarea class="form-control" placeholder="Write your notes here..." rows="10" style="background: #444; color: white; border-color: #555;"></textarea>
-                             <button class="btn btn-primary mt-3">Save Note</button>
-                         </div>
+                        <div class="card" style="background: #333; border-radius: 15px; padding: 15px;">
+                            <textarea class="form-control" placeholder="Write your notes here..." rows="10" style="background: #444; color: white; border-color: #555;"></textarea>
+                            <button class="btn btn-primary mt-3">Save Note</button>
+                        </div>
                     </div>
-
-                     {# Chat Button (fixed position) #}
-                     {# This button will be styled later and potentially integrated with the Pomodoro toggle aesthetic #}
-                     <button class="btn btn-primary" id="chat-toggle-btn" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">Chat</button>
-
-                     {# Chat Window structure (initially hidden) #}
-                     <div id="chat-window" class="chat-window">
-                         <div class="chat-header">
-                             <h5 class="chat-title">Hyperion Bot (Groq)</h5>
-                             <button type="button" class="close-chat">&times;</button>
-                         </div>
-                         <div class="chat-body" id="chatMessages">
-                             {# Chat messages will appear here #}
-                         </div>
-                         <div class="chat-footer">
-                             <input type="text" id="chatInput" class="form-control" placeholder="Type a message...">
-                             <button class="btn btn-primary" onclick="sendMessage()">Send</button>
-                         </div>
-                     </div>
-
+                    <div id="chat-window" class="chat-window">
+                        <div class="chat-header">
+                            <h5 class="chat-title">Hyperion Bot (Groq)</h5>
+                            <button type="button" class="close-chat">×</button>
+                        </div>
+                        <div class="chat-body" id="chatMessages"></div>
+                        <div class="chat-footer">
+                            <input type="text" id="chatInput" class="form-control" placeholder="Type a message...">
+                            <button class="btn btn-primary" onclick="sendMessage()">Send</button>
+                        </div>
+                    </div>
                 </div>
-                {# /.container-fluid #}
-
             </div>
-            {# End of Main Content #}
-
-            {# Footer #}
             <footer class="sticky-footer">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto text-white">
@@ -270,20 +220,11 @@
                     </div>
                 </div>
             </footer>
-            {# End of Footer #}
-
         </div>
-        {# End of Content Wrapper #}
-
     </div>
-    {# End of Page Wrapper #}
-
-    {# Scroll to Top Button #}
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
-
-    {# Logout Modal #}
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -297,142 +238,94 @@
                 <div class="modal-body" style="color: white;">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer" style="border-color: #444;">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    {# This button also triggers the POST form submission #}
                     <a class="btn btn-primary" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
                 </div>
             </div>
         </div>
     </div>
-
-    {# --- Hidden POST form for Logout --- #}
-    {# This form is submitted via JavaScript when the logout links are clicked #}
     <form id="logout-form" action="{% url 'logout' %}" method="post" style="display: none;">
         {% csrf_token %}
     </form>
-    {# --- End Hidden Logout Form --- #}
+{% endblock %}
 
-
+{% block extra_body %}
+    {% include 'pomodoro/focus_regain_modal.html' %}
+    {% include 'pomodoro/confirmation_modal.html' %}
 {% endblock %}
 
 {% block extra_js %}
-    {# Link to dashboard-specific JavaScript and vendor scripts using {% static %} #}
-    {# Vendor core JavaScript #}
     <script src="{% static 'dashboard/vendor/jquery/jquery.min.js' %}"></script>
     <script src="{% static 'dashboard/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-
-    {# Core plugin JavaScript #}
     <script src="{% static 'dashboard/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
-
-    {# Custom scripts for all pages (SB Admin 2 theme JS) #}
     <script src="{% static 'dashboard/dash-js/sb-admin-2.min.js' %}"></script>
-
-    {# Page level plugins (Chart.js) #}
     <script src="{% static 'dashboard/vendor/chart.js/Chart.min.js' %}"></script>
-
-    {# Page level custom scripts (Chart demos and your main dashboard script) #}
-    {# Make sure these paths are correct based on where you copied them #}
-    <script src="{% static 'dashboard/dash-js/demo/chart-area-demo.js' %}"></script> {# Adjust path if needed #}
-    <script src="{% static 'dashboard/dash-js/demo/chart-pie-demo.js' %}"></script>   {# Adjust path if needed #}
-    {# Based on your HTML, you have two charts, so these two demo files are likely needed #}
-    {# If you have a bar chart or datatables, include those demo files too: #}
-    {# <script src="{% static 'dashboard/dash-js/demo/chart-bar-demo.js' %}"></script> #}
-    {# <script src="{% static 'dashboard/dash-js/demo/datatables-demo.js' %}"></script> #}
-
-    {# Your custom dashboard script #}
-    <script src="{% static 'dashboard/dash-js/dash-script.js' %}"></script> {# Adjust path if needed #}
-
-    {# Script to handle showing/hiding sections (basic example) #}
+    <script src="{% static 'dashboard/dash-js/demo/chart-area-demo.js' %}"></script>
+    <script src="{% static 'dashboard/dash-js/demo/chart-pie-demo.js' %}"></script>
+    <script src="{% static 'dashboard/dash-js/dash-script.js' %}"></script>
+    <script src="{% static 'pomodoro/script.js' %}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
             const featureSections = document.querySelectorAll('.feature-section');
-            const defaultContent = document.getElementById('default-content'); // The Dashboard Overview section
+            const defaultContent = document.getElementById('default-content');
 
             navLinks.forEach(link => {
                 link.addEventListener('click', function(event) {
-                    event.preventDefault(); // Prevent default link behavior
+                    event.preventDefault();
                     const targetId = this.getAttribute('data-target');
-
-                    // Hide all feature sections and default content
-                    featureSections.forEach(section => {
-                        section.style.display = 'none';
-                    });
-                    if (defaultContent) {
-                         defaultContent.style.display = 'none';
-                    }
-
-
-                    // Show the targeted section
+                    featureSections.forEach(section => section.style.display = 'none');
+                    if (defaultContent) defaultContent.style.display = 'none';
                     const targetSection = document.getElementById(targetId);
-                    if (targetSection) {
-                        targetSection.style.display = 'block'; // Or 'flex' depending on your CSS layout
-                         console.log("Showing section:", targetId);
-                    } else {
-                         console.warn("Target section not found for ID:", targetId);
-                         // If a link doesn't have a corresponding section, perhaps show the default dashboard?
-                          if (defaultContent) {
-                              defaultContent.style.display = 'block';
-                          }
-                    }
-
-                    // Optional: Update active state of nav links
+                    if (targetSection) targetSection.style.display = 'block';
+                    else if (defaultContent) defaultContent.style.display = 'block';
                     navLinks.forEach(nav => nav.classList.remove('active'));
                     this.classList.add('active');
                 });
             });
-
-            // Optional: Set the Dashboard link as active and show default content on page load
             const dashboardLink = document.querySelector('.navbar-nav .nav-link[data-target="default-content"]');
-            if (dashboardLink) {
+            if (dashboardLink && defaultContent) {
                 dashboardLink.classList.add('active');
-                 if (defaultContent) {
-                      defaultContent.style.display = 'block';
-                 }
+                defaultContent.style.display = 'block';
             }
-             console.log("Dashboard navigation JS loaded.");
 
-             {# Add JS for the chat button toggle - basic example #}
-             const chatToggleBtn = document.getElementById('chat-toggle-btn');
-             const chatWindow = document.getElementById('chat-window');
-             const closeChatBtn = chatWindow ? chatWindow.querySelector('.close-chat') : null;
+            const chatToggleBtn = document.getElementById('chat-toggle-btn');
+            const chatWindow = document.getElementById('chat-window');
+            const closeChatBtn = chatWindow ? chatWindow.querySelector('.close-chat') : null;
 
-             if (chatToggleBtn && chatWindow) {
-                 chatToggleBtn.addEventListener('click', function() {
-                     chatWindow.style.display = chatWindow.style.display === 'block' ? 'none' : 'block';
-                      console.log("Chat window toggled.");
-                 });
-             } else {
-                  console.warn("Chat toggle button or window not found.");
-             }
+            if (chatToggleBtn && chatWindow) {
+                chatToggleBtn.addEventListener('click', function() {
+                    chatWindow.style.display = chatWindow.style.display === 'block' ? 'none' : 'block';
+                });
+            }
+            if (closeChatBtn && chatWindow) {
+                closeChatBtn.addEventListener('click', function() {
+                    chatWindow.style.display = 'none';
+                });
+            }
 
-             if (closeChatBtn && chatWindow) {
-                 closeChatBtn.addEventListener('click', function() {
-                     chatWindow.style.display = 'none';
-                      console.log("Chat window closed.");
-                 });
-             } else {
-                  console.warn("Chat close button not found.");
-             }
+            // Pomodoro sidebar toggle logic will be handled by pomodoro/script.js
+            const pomodoroToggleBtn = document.getElementById('openPomodoroSidebarBtn');
+            const sidebar = document.getElementById('pomodoroSidebar');
 
-             {# Placeholder for sendMessage function - will be implemented later #}
-             window.sendMessage = function() {
-                 const chatInput = document.getElementById('chatInput');
-                 const chatMessages = document.getElementById('chatMessages');
-                 const message = chatInput.value.trim();
+            if (pomodoroToggleBtn && sidebar) {
+                pomodoroToggleBtn.addEventListener('click', function() {
+                    // Toggling visibility/transform will be handled by script.js
+                    // Ensure script.js listens for this button click.
+                });
+            }
 
-                 if (message) {
-                      console.log("Sending message:", message);
-                      // TODO: Implement sending this message to your Django backend/Gorq API
-                      // For now, just display it in the chat window
-                      const messageElement = document.createElement('div');
-                      messageElement.textContent = `You: ${message}`;
-                      chatMessages.appendChild(messageElement);
-                      chatInput.value = ''; // Clear input
-                      chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll to bottom
-                 }
-             };
-
-
+            window.sendMessage = function() {
+                const chatInput = document.getElementById('chatInput');
+                const chatMessages = document.getElementById('chatMessages');
+                const message = chatInput.value.trim();
+                if (message) {
+                    const messageElement = document.createElement('div');
+                    messageElement.textContent = `You: ${message}`;
+                    chatMessages.appendChild(messageElement);
+                    chatInput.value = '';
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                }
+            };
         });
     </script>
 {% endblock %}
