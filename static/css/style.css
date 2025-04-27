@@ -46,8 +46,9 @@ header, section {
     --light-grey: #D3D3D3;
     --bggradient: linear-gradient(to bottom, #F5F5FF, #EDE9FF); /* Brighter lavender to soft purple-white */
     --dggradient: linear-gradient(to bottom, #EDE9FF, #F5F5FF); /* Reverse for contrast */
-    --sggradient: linear-gradient(to bottom, #EDE9FF, #F5F5FF, #EDE9FF); /* Subtle bright loop */
-    --pggradient: linear-gradient(to bottom, #EDE9FF, #E6E0FA); /* Soft purple to lighter purple */
+    --sggradient: linear-gradient(to bottom, #EDE9FF, #F5F5FF, #ffffff); /* Subtle bright loop */
+    --pggradient: linear-gradient(to bottom, #ffffff, #E6E0FA); /* Soft purple to lighter purple */
+    --vtwgradient: liner-gradient(to bottom, )
 }
 
 header{
@@ -123,7 +124,7 @@ header{
 .some-features {
     width: 100%;
     height: 55vmin;
-    background: url("/static/images/sample preview img.png"); /* Updated path */
+    background: url("/static/images/m.png"); /* Updated path */
     background-position: -24rem -19rem;
     background-size: 150%;
     position: relative;
