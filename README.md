@@ -52,7 +52,7 @@ Before you unleash Hyperion, make sure you've got your arsenal ready:
 - **🧬 Git** --- to clone the repo and join the hunt
 
 Database Setup Ritual
-~~~~~~~~~~~~~~~~~~~~~
+---
 
 1. Summon your database (PostgreSQL):
 
@@ -84,7 +84,11 @@ Database Setup Ritual
 Philosophy
 ---
 
-Built not to manage students... But to awaken the inner hunter within—focus with flair, not fear!
+Built not to manage students...
+
+But to awaken the inner hunter within—
+
+focus with flair, not fear!
 
 Setup Instructions
 ---
@@ -124,6 +128,10 @@ Setup Instructions
 License
 ---
 
-This project is licensed under the MIT License. Feel free to use, fork, or contribute to the madness—join the hunt!
+This project is licensed under the MIT License.
+
+Feel free to use, fork, or contribute to the madness—
+
+join the hunt!
 
 *"Silence the world. Focus the yourself. Unleash your Hyperion—Dante would approve (with a stylish hair flip)!"*
