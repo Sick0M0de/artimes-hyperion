@@ -55,7 +55,7 @@ body.dark-theme .topbar {
   background-color: #1C1824  !important; /* Slightly lighter dark for the navbar */
   color: #ffffff; /* White text in navbar */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* More prominent shadow */
-  padding: 0 1rem; /* Add some horizontal padding to the navbar */
+  padding: 0.1rem; /* Add some horizontal padding to the navbar */
   min-height: 50px; /* Ensure sufficient height for the navbar */
   height: 50px;
 }
@@ -117,12 +117,10 @@ body.dark-theme .topbar .navbar-nav .nav-item .form-inline {
 
 /* You might also need to adjust padding on the nav-link for smaller screens */
 body.dark-theme .topbar .navbar-nav .nav-item.dropdown.d-sm-none .nav-link {
-  
-  padding-top: 0; /* Remove top padding */
-  padding-bottom: 0; /* Remove bottom padding */
-  display: flex; /* Use flexbox for vertical alignment */
-  align-items: center; /* Vertically align icon */
-   height: 100%;
+  padding: 0.5rem 0.75rem; /* Consistent padding like other nav links */
+  height: 100%; /* Allow link to take full height for flex centering */
+  display: flex;
+  align-items: center;
 }
 
 body.dark-theme .card {
@@ -306,32 +304,34 @@ html {
     opacity: 1; /* Fade in when the 'show' class is added */
 }
 
-/* Animated underline on navbar links */
+
 body.dark-theme .topbar .navbar-nav .nav-item .nav-link {
   position: relative; /* Needed for positioning the pseudo-element */
   overflow: hidden; /* Hide the pseudo-element until it slides in */
-   /* Add some space for the underline */
-  padding-top: 0; /* Remove top padding */
-  padding-bottom: 0; /* Remove bottom padding */
-  margin-bottom: 0; /* Remove bottom margin */
-     display: flex; /* Use flexbox to align search input and button */
-     align-items: center; /* Vertically align items in search form */
-     height: 100%; /* Make form take full height for alignment */
+  color: #cccccc; /* Lighter gray for nav links */
+  margin-right: 1rem; /* Spacing between nav items */
+  padding: 0.5rem 0.75rem; /* Consistent padding around the link text */
+  transition: color 0.3s ease; /* Smooth transition for hover */
+  height: 100%; /* Allow link to take full height for flex centering */
+  display: flex; /* Use flexbox to align content if needed */
+  align-items: center; /* Vertically center content if using flex */
 }
 
 body.dark-theme .topbar .navbar-nav .nav-item .nav-link::after {
   content: '';
   position: absolute;
-  bottom: 2px; /* Position the underline */
+  bottom: 5px; /* Position the underline */
   left: 0;
   width: 100%;
   height: 1.5px; /* Thickness of the underline */
-  background-color: #007bff; /* Underline color (using Bootstrap primary color) */
+  background-color: #007bff; /* Underline color */
   transform: translateX(-100%); /* Start off-screen to the left */
   transition: transform 0.3s ease-out; /* Smooth sliding transition */
- 
-  
+
+
 }
+
+
 
 body.dark-theme .topbar .navbar-nav .nav-item .nav-link:hover::after,
 body.dark-theme .topbar .navbar-nav .nav-item .nav-link.active::after {
@@ -340,15 +340,13 @@ body.dark-theme .topbar .navbar-nav .nav-item .nav-link.active::after {
 
 /* Adjust padding of the search nav item if the underline overlaps */
 body.dark-theme .topbar .navbar-nav .nav-item .form-inline {
-   
-   
-   padding-top: 0; /* Remove top padding */
-   padding-bottom: 0; /* Remove bottom padding */
-   margin-bottom: 0; /* Remove bottom margin */
-   display: flex; /* Use flexbox to align search input and button */
-   align-items: center; /* Vertically align items in search form */
-   height: 100%;
+  padding: 0.5rem 0; /* Add vertical padding, no horizontal needed here usually */
+  margin: 0; /* Remove any default margins */
+  display: flex; /* Use flexbox to align search input and button */
+  align-items: center; /* Vertically align items in search form */
+  height: 100%; /* Allow form to take full height for flex centering */
 }
+
 
 /* Subtle hover effect for cards */
 body.dark-theme .card {
@@ -498,6 +496,11 @@ p, span, div, label, input, textarea, button {
   background-color: #2c2c2c; /* Darker background for input */
   color: #e0e0e0;
   border-color: #444444;
+}
+body.dark-theme .topbar,
+body.dark-theme .topbar .navbar-nav {
+    display: flex;
+    align-items: center; /* Vertically align items within these containers */
 }
 
 
